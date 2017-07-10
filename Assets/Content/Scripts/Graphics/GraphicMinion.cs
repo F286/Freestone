@@ -2,11 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ManagerGame : MonoBehaviour {
-    //public Game game;
-
-    public List<Action> stack;
-    public List<Graphic> graphics;
+public class GraphicMinion : Graphic {
 
 	// Use this for initialization
 	void Start () {
