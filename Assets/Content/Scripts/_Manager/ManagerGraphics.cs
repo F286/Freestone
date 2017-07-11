@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ManagerGame : MonoBehaviour {
-    //public Game game;
+public class ManagerGraphics : MonoBehaviour {
 
-    public Phase sequence;
-    public List<Character> characters;
+	public List<Graphic> graphics;
 
 	// Use this for initialization
 	void Start () {

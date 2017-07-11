@@ -4,33 +4,48 @@ using UnityEngine;
 
 public enum EventType
 {
-    Damage,
-    Heal,
-    SummonMinion,
+    None,
+	PlayMinion,
+	PlaySpell,
+	DamageMinion,
+	DamageCharacter,
+    HealMinion,
+    HealCharacter,
+	DrawCard,
+	TurnBegin,
+	TurnEnd,
+    //Damage,
+    //Heal,
+    //SummonMinion,
+    //DrawCard,
 }
-public enum EventTarget
-{
-    Minion,
-    Character,
-    Random,
-}
+//public enum EventTarget
+//{
+//    None,
+//    Minion,
+//    Character,
+//    Random,
+//}
 
 [System.Serializable]
 public class Event {
-    public string name = "event name";
+    //public string name = "event name";
     public EventType type;
     public string data;
-    public EventTarget target;
+    //public EventTarget target;
 
     public void evaluate(ManagerGame game)
     {
         switch (type)
         {
-            case EventType.Damage:
+            case EventType.PlayMinion:
                 break;
-            case EventType.Heal:
+            case EventType.PlaySpell:
                 break;
-            case EventType.SummonMinion:
+            case EventType.DamageMinion:
+                break;
+            default:
+                Debug.LogError("Event.cs, event type not implemented.");
                 break;
         }
     }
