@@ -8,13 +8,7 @@ public class ManagerGame : MonoBehaviour {
     public Phase sequence;
     public List<Character> characters;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public void OnEndTurn() {
+        print("on end turn");
+    }
 }
