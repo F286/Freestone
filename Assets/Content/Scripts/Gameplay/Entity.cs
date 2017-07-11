@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//public enum EntityType {
-//    Card,
-//    Minion,
-//    Hero,
-//}
+public enum EntityType {
+    Spell,
+    Minion,
+    Hero,
+}
 
 [System.Serializable]
 public class Entity {
@@ -24,4 +24,18 @@ public class Entity {
 
     public List<Event> actions;
     public List<Event> events;
+
+    public EntityType type {
+        get {
+            if (health == 0) {
+                return EntityType.Spell;
+            }
+            else if(name.Contains("hero")) {
+                return EntityType.Hero;
+            }
+            else {
+                return EntityType.Minion;
+            }
+        }
+    }
 }

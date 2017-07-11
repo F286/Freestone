@@ -7,6 +7,11 @@ public class ManagerGame : MonoBehaviour {
 
     public Event sequence;
     public List<Character> characters;
+    public List<Card> cards;
+
+    public void Start() {
+        GetComponent<ManagerGraphics>().updateGraphics(characters, cards);
+    }
 
     public void OnEndTurn() {
         print("on end turn");

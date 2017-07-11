@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class Character {
     //public Entity card;
-    public string entity;
+    public string name;
     public int controller;
 
 	public int attack;
@@ -14,8 +14,13 @@ public class Character {
 	public int maxAttack;
 	public int maxHealth;
 
-	//public string title;
-
-    //public int health;
-    //public int attack;
+    public Entity entity {
+        get {
+            var r = Data.instance.getEntity(name);
+            if (r == null) {
+                Debug.LogError("Could not find entity with name '" + name + "' in Character.cs");
+            }
+            return r;
+        }
+    }
 }
