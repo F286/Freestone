@@ -28,6 +28,7 @@ public class ManagerGraphics : MonoBehaviour {
 				}
 				var position = boards[controllerIndex].evaluate(t);
 				var card = Instantiate(Resources.Load("Prefab Minion"), position, Quaternion.identity);
+                (card as GameObject).GetComponent<GraphicMinion>().index = i;
 			}
 
 			// Add all cards to hand
@@ -44,7 +45,8 @@ public class ManagerGraphics : MonoBehaviour {
 				}
 				var position = hands[controllerIndex].evaluate(t);
 				var card = Instantiate(Resources.Load("Prefab Card"), position, Quaternion.identity);
-			}
+			    (card as GameObject).GetComponent<GraphicCard>().index = i;
+            }
 
         }
     }

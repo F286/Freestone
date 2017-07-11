@@ -2,15 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GraphicCard : Graphic {
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+public class GraphicCard : Graphic, IOnClick {
+	public void OnClick()
+	{
+		ManagerGame.instance.TakeAction(index);
 	}
 }
