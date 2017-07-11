@@ -4,5 +4,5 @@ using UnityEngine;
 
 [System.Serializable]
 public class Game {
-    public List<Action> stack;
+    public List<Event> stack;
 }

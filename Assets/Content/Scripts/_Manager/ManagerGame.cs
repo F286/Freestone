@@ -5,7 +5,8 @@ using UnityEngine;
 public class ManagerGame : MonoBehaviour {
     //public Game game;
 
-    public List<Action> stack;
+    public List<Event> queue;
+    public List<Character> characters;
     public List<Graphic> graphics;
 
 	// Use this for initialization
