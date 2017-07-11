@@ -4,11 +4,15 @@ using UnityEngine;
 
 public enum EventType
 {
+    None,
+	Attack,
+	Damage,
     Minion,
-    Spell,
+	Spell,
     Draw,
     TurnBegin,
     TurnEnd,
+
     //None,
 
 	//PlayMinion,
@@ -17,8 +21,8 @@ public enum EventType
 
 	//DamageMinion,
 	//DamageCharacter,
- //   HealMinion,
- //   HealCharacter,
+    //HealMinion,
+    //HealCharacter,
 	//DrawCard,
 	//TurnBegin,
 	//TurnEnd,
@@ -38,12 +42,17 @@ public enum EventTarget
 
 [System.Serializable]
 public class Event {
-    public string name = "test_0";
+    //public string name = "test_0";
+
+    // only reference string name, put event type targeting ect.. in data thingy
     public EventType type;
     //public string data;
     public EventTarget target;
+    public string data;
 
-    public void evaluate(ManagerGame game)
+	public List<Event> children;
+
+	public void evaluate(ManagerGame game)
     {
         //switch (type)
         //{

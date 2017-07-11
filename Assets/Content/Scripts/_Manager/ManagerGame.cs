@@ -5,7 +5,7 @@ using UnityEngine;
 public class ManagerGame : MonoBehaviour {
     //public Game game;
 
-    public Phase sequence;
+    public Event sequence;
     public List<Character> characters;
 
     public void OnEndTurn() {
