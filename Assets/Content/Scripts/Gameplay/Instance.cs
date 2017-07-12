@@ -25,7 +25,7 @@ public class Instance
 	public int health;
 	public int maxHealth;
 
-    static Entity empty = new Entity();
+    public static Entity empty = new Entity();
 	public Entity entity
 	{
 		get

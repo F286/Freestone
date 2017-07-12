@@ -29,6 +29,10 @@ public class ManagerGame : MonoBehaviour {
                                          || _.target == EventTarget.Character) != null;
 
         print(isTargetable);
+
+        if(isTargetable && b != Instance.empty) {
+            
+        }
     }
     public void DragCard(GestureState state, Graphic card) {
         //print(card.index);
@@ -37,7 +41,7 @@ public class ManagerGame : MonoBehaviour {
 
         if (state.phase == GesturePhase.End)
         {
-            TakeAction(Instance(state.grab), Instance((state.target)));
+            TakeAction(GetInstance(state.grab), GetInstance((state.target)));
             //var grab = cards[state.grab.GetComponent<Graphic>().index];
             //var target = 
 
@@ -45,7 +49,7 @@ public class ManagerGame : MonoBehaviour {
             //print(target);
         }
     }
-    Instance Instance(GameObject grab) {
+    Instance GetInstance(GameObject grab) {
         if (grab == null) {
             return empty;
         }
