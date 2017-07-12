@@ -2,12 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum CardLocation {
+    Hand,
+    Board,
+    Hero,
+}
+
 [System.Serializable]
 public class Card
 {
-	//public Entity card;
+    public CardLocation location;
+
 	public string name;
 	public int controller;
+
+	public int manaCost;
+
+	public int attack;
+	public int maxAttack;
+
+	public int health;
+	public int maxHealth;
 
 	public Entity entity
 	{

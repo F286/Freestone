@@ -8,14 +8,14 @@ public class ManagerGraphics : MonoBehaviour {
 	public List<Arc> boards;
 	public List<Arc> hands;
 
-    public void updateGraphics(List<Character> characters, List<Card> cards) {
+    public void updateGraphics(List<Card> cards) {
 
         // Iterate over each controller
         for (int controllerIndex = 0; controllerIndex < 2; controllerIndex++)
 		{
             // Add all minions to board
-			var minions = characters.FindAll(_ => _.controller == controllerIndex
-											 && _.entity.type == EntityType.Minion);
+			var minions = cards.FindAll(_ => _.controller == controllerIndex
+                                        && _.location == CardLocation.Board);
 
 			for (int i = 0; i < minions.Count; i++)
 			{
@@ -28,11 +28,12 @@ public class ManagerGraphics : MonoBehaviour {
 				}
 				var position = boards[controllerIndex].evaluate(t);
 				var card = Instantiate(Resources.Load("Prefab Minion"), position, Quaternion.identity);
-                (card as GameObject).GetComponent<GraphicMinion>().index = i;
+                (card as GameObject).GetComponent<GraphicMinion>().index = cards.FindIndex(_ => _ == item);
 			}
 
 			// Add all cards to hand
-			var cardsFind = cards.FindAll(_ => _.controller == controllerIndex);
+			var cardsFind = cards.FindAll(_ => _.controller == controllerIndex
+										  && _.location == CardLocation.Hand);
 
 			for (int i = 0; i < cardsFind.Count; i++)
 			{
@@ -45,7 +46,7 @@ public class ManagerGraphics : MonoBehaviour {
 				}
 				var position = hands[controllerIndex].evaluate(t);
 				var card = Instantiate(Resources.Load("Prefab Card"), position, Quaternion.identity);
-			    (card as GameObject).GetComponent<GraphicCard>().index = i;
+			    (card as GameObject).GetComponent<GraphicCard>().index = cards.FindIndex(_ => _ == item);
             }
 
         }

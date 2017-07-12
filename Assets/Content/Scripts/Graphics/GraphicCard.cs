@@ -5,6 +5,6 @@ using UnityEngine;
 public class GraphicCard : Graphic, IOnClick {
 	public void OnClick()
 	{
-		ManagerGame.instance.TakeAction(index);
+		ManagerGame.instance.TakeAction(this);
 	}
 }
