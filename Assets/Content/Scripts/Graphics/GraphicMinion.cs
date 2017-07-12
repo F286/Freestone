@@ -3,8 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GraphicMinion : Graphic, IOnClick {
-	public void OnClick() {
-        ManagerGame.instance.TakeAction(this);
-    }
+public class GraphicMinion : Graphic {
+
 }

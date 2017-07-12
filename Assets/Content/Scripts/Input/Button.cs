@@ -3,13 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Button : MonoBehaviour, IOnClick
+public class Button : MonoBehaviour, IOnTouch
 {
     public GameObject target;
     public string methodName;
 
-    public void OnClick()
-    {
-        target.SendMessage(methodName);
+    public void OnTouch(GestureState state)
+	{
+		target.SendMessage(methodName);
     }
 }

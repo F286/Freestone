@@ -17,8 +17,10 @@ public class ManagerGame : MonoBehaviour {
     public void OnEndTurn() {
         print("on end turn");
     }
-    public void TakeAction(Graphic card) {
-        print(card.index);
+    public void TakeAction(GestureState state, Graphic card) {
+		//print(card.index);
+		print(state.grab);
+		print(state.overlap);
     }
 
 }
