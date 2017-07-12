@@ -10,8 +10,8 @@ public enum GesturePhase {
 }
 public struct GestureState {
     public GesturePhase phase;
-    public GameObject grab;
-    public GameObject target;
+    public GameObject a;
+    public GameObject b;
 }
 public interface IOnTouch {
     void OnTouch(GestureState state);
@@ -40,8 +40,8 @@ public class InputManager : MonoBehaviour {
         if (phase != GesturePhase.None && current != null) {
             var state = new GestureState();
 			state.phase = phase;
-			state.grab = current;
-			state.target = GetOverlap();
+			state.a = current;
+			state.b = GetOverlap();
 			//print("input " + phase);
 			//print("input " + current);
 			current.SendMessage("OnTouch", state, SendMessageOptions.DontRequireReceiver);

@@ -8,14 +8,19 @@ public class ManagerGraphics : MonoBehaviour {
 	public List<Arc> boards;
 	public List<Arc> hands;
 
-    public void updateGraphics(List<Instance> cards) {
+    public void updateGraphics(List<Entity> entities) {
+
+        for (int i = 0; i < entities.Count; i++)
+        {
+            entities[i].index = i;
+        }
 
         // Iterate over each controller
         for (int controllerIndex = 0; controllerIndex < 2; controllerIndex++)
 		{
             // Add all minions to board
-			var minions = cards.FindAll(_ => _.controller == controllerIndex
-                                        && _.location == CardLocation.Board);
+			var minions = entities.FindAll(_ => _.controller == controllerIndex
+                                        && _.location == EntityLocation.Board);
 
 			for (int i = 0; i < minions.Count; i++)
 			{
@@ -28,12 +33,12 @@ public class ManagerGraphics : MonoBehaviour {
 				}
 				var position = boards[controllerIndex].evaluate(t);
 				var card = Instantiate(Resources.Load("Prefab Minion"), position, Quaternion.identity);
-                (card as GameObject).GetComponent<GraphicMinion>().index = cards.FindIndex(_ => _ == item);
+                (card as GameObject).GetComponent<GraphicMinion>().index = item.index;
 			}
 
 			// Add all cards to hand
-			var cardsFind = cards.FindAll(_ => _.controller == controllerIndex
-										  && _.location == CardLocation.Hand);
+			var cardsFind = entities.FindAll(_ => _.controller == controllerIndex
+										  && _.location == EntityLocation.Hand);
 
 			for (int i = 0; i < cardsFind.Count; i++)
 			{
@@ -46,7 +51,7 @@ public class ManagerGraphics : MonoBehaviour {
 				}
 				var position = hands[controllerIndex].evaluate(t);
 				var card = Instantiate(Resources.Load("Prefab Card"), position, Quaternion.identity);
-			    (card as GameObject).GetComponent<GraphicCard>().index = cards.FindIndex(_ => _ == item);
+                (card as GameObject).GetComponent<GraphicCard>().index = item.index;
             }
 
         }

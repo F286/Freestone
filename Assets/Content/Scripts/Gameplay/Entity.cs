@@ -8,35 +8,33 @@ public enum EntityType {
     Minion,
     Hero,
 }
+public enum EntityLocation
+{
+    Invalid,
+    Deck,
+    Hand,
+    Board,
+    Hero,
+}
 
 [System.Serializable]
-public struct Entity {
+public class Entity {
 	public string name;
     public EntityType type;
+    public EntityLocation location;
 
 	public int manaCost;
 	public string title;
 	public string description;
 	public string art;
 
-	//[Header("Assumed to be spell if health is zero")]
-	public int attack;
+    public int attack;
+    public int attackMax;
     public int health;
+    public int healthMax;
 
-    //public List<Event> actions;
+    public int controller;
+    public int index;
+
     public List<Event> events;
-
-    //public EntityType type {
-    //    get {
-    //        if (health == 0) {
-    //            return EntityType.Spell;
-    //        }
-    //        else if(name.Contains("hero")) {
-    //            return EntityType.Hero;
-    //        }
-    //        else {
-    //            return EntityType.Minion;
-    //        }
-    //    }
-    //}
 }

@@ -6,54 +6,38 @@ public class ManagerGame : MonoBehaviour {
     public static ManagerGame instance;
     public Event sequence;
     //public List<Character> characters;
-    public List<Instance> cards;
-    static Instance empty = new Instance();
+    public List<Entity> instances;
+    //static Instance empty = new Instance();
 
     public void Awake() {
         instance = this;
     }
     public void Start() {
-        GetComponent<ManagerGraphics>().updateGraphics(cards);
+        GetComponent<ManagerGraphics>().updateGraphics(instances);
     }
     public void OnEndTurn() {
         print("on end turn");
     }
-    public void TakeAction(Instance instanceA, Instance instanceB) {
-        var a = instanceA.entity;
-        var b = instanceB.entity;
-        print("a " + a.name);
-        print("b " + b.name);
+    public void TakeAction(int a, int b) {
+        //var a = instanceA;
+        //var b = instanceB;
+        //print("a " + a.name);
+        //print("b " + b.name);
 
         //print(a.events.Count);
-        var target = a.events.Find(_ => _.target == EventTarget.Minion 
-                                   || _.target == EventTarget.Character);
+        var target = instances[a].events.Find(_ => _.target == EventTarget.Minion || 
+                                              _.target == EventTarget.Character);
 
         print(target);
 
-        if(target.type == EventType.Invalid && b.type != EntityType.Invalid) {
+        if(target.type == EventType.Invalid && b != -1) {
             sequence.children.Add(target);
         }
     }
     public void DragCard(GestureState state, Graphic card) {
-        //print(card.index);
-        //print(state.grab);
-        //print(state.target);
-
-        if (state.phase == GesturePhase.End)
-        {
-            TakeAction(GetInstance(state.grab), GetInstance((state.target)));
-            //var grab = cards[state.grab.GetComponent<Graphic>().index];
-            //var target = 
-
-            //print(grab);
-            //print(target);
+        if (state.phase == GesturePhase.End) {
+            TakeAction(state.a == null ? -1 : state.a.GetComponent<Graphic>().index, 
+                       state.b == null ? -1 : state.b.GetComponent<Graphic>().index);
         }
     }
-    Instance GetInstance(GameObject grab) {
-        if (grab == null) {
-            return empty;
-        }
-        return cards[grab.GetComponent<Graphic>().index];
-    }
-
 }

@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum CardLocation {
-    None,
-    Hand,
-    Board,
-    Hero,
-}
+//public enum CardLocation {
+//    None,
+//    Hand,
+//    Board,
+//    Hero,
+//}
 
 [System.Serializable]
 public class Instance
 {
-    public CardLocation location;
+    public EntityLocation location;
 
 	public string name = "";
 	public int controller = -1;

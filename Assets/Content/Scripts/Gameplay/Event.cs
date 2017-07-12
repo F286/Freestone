@@ -23,7 +23,7 @@ public enum EventTarget
 // Modifier - random, ect..?
 
 [System.Serializable]
-public struct Event {
+public class Event {
     //public string name = "test_0";
 
     // only reference string name, put event type targeting ect.. in data thingy
