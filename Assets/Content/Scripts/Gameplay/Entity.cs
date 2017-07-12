@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum EntityType {
+    None,
     Spell,
     Minion,
     Hero,
@@ -10,8 +11,7 @@ public enum EntityType {
 
 [System.Serializable]
 public class Entity {
-	//public EntityType type;
-	public string name;
+	public string name = "";
 
 	public int manaCost;
 	public string title;

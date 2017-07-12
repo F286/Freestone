@@ -9,6 +9,6 @@ public class Graphic : MonoBehaviour, IOnTouch {
     public void OnTouch(GestureState state)
 	{
         //print(state.phase);
-		ManagerGame.instance.TakeAction(state, this);
+		ManagerGame.instance.DragCard(state, this);
     }
 }

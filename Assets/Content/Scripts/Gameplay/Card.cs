@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum CardLocation {
+    None,
     Hand,
     Board,
     Hero,
@@ -13,8 +14,8 @@ public class Card
 {
     public CardLocation location;
 
-	public string name;
-	public int controller;
+	public string name = "";
+	public int controller = -1;
 
 	public int manaCost;
 
@@ -24,10 +25,14 @@ public class Card
 	public int health;
 	public int maxHealth;
 
+    static Entity empty = new Entity();
 	public Entity entity
 	{
 		get
 		{
+            if(name == "") {
+                return empty;
+            }
 			var r = Data.instance.getEntity(name);
 			if (r == null)
 			{
