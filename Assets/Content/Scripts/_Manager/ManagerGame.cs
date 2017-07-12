@@ -6,8 +6,8 @@ public class ManagerGame : MonoBehaviour {
     public static ManagerGame instance;
     public Event sequence;
     //public List<Character> characters;
-    public List<Card> cards;
-    static Card empty = new Card();
+    public List<Instance> cards;
+    static Instance empty = new Instance();
 
     public void Awake() {
         instance = this;
@@ -18,11 +18,17 @@ public class ManagerGame : MonoBehaviour {
     public void OnEndTurn() {
         print("on end turn");
     }
-    public void TakeAction(Card a, Card b) {
-        var aEntity = a.entity;
-        var bEntity = b.entity;
-        print("a " + aEntity.name);
-        print("b " + bEntity.name);
+    public void TakeAction(Instance instanceA, Instance instanceB) {
+        var a = instanceA.entity;
+        var b = instanceB.entity;
+        print("a " + a.name);
+        print("b " + b.name);
+
+        //print(a.events.Count);
+        var isTargetable = a.events.Find(_ => _.target == EventTarget.Minion 
+                                         || _.target == EventTarget.Character) != null;
+
+        print(isTargetable);
     }
     public void DragCard(GestureState state, Graphic card) {
         //print(card.index);
@@ -31,7 +37,7 @@ public class ManagerGame : MonoBehaviour {
 
         if (state.phase == GesturePhase.End)
         {
-            TakeAction(GetCard(state.grab), GetCard((state.target)));
+            TakeAction(Instance(state.grab), Instance((state.target)));
             //var grab = cards[state.grab.GetComponent<Graphic>().index];
             //var target = 
 
@@ -39,7 +45,7 @@ public class ManagerGame : MonoBehaviour {
             //print(target);
         }
     }
-    Card GetCard(GameObject grab) {
+    Instance Instance(GameObject grab) {
         if (grab == null) {
             return empty;
         }

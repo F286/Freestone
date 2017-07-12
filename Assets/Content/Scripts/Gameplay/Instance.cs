@@ -10,7 +10,7 @@ public enum CardLocation {
 }
 
 [System.Serializable]
-public class Card
+public class Instance
 {
     public CardLocation location;
 

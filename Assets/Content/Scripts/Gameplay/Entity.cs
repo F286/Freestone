@@ -18,11 +18,11 @@ public class Entity {
 	public string description;
 	public string art;
 
-	[Header("Assumed to be spell if health is zero")]
+	//[Header("Assumed to be spell if health is zero")]
 	public int attack;
     public int health;
 
-    public List<Event> actions;
+    //public List<Event> actions;
     public List<Event> events;
 
     public EntityType type {

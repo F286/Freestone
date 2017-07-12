@@ -8,7 +8,7 @@ public class ManagerGraphics : MonoBehaviour {
 	public List<Arc> boards;
 	public List<Arc> hands;
 
-    public void updateGraphics(List<Card> cards) {
+    public void updateGraphics(List<Instance> cards) {
 
         // Iterate over each controller
         for (int controllerIndex = 0; controllerIndex < 2; controllerIndex++)
