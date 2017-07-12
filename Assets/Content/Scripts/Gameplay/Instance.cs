@@ -34,7 +34,7 @@ public class Instance
                 return empty;
             }
 			var r = Data.instance.getEntity(name);
-			if (r == null)
+            if (r.type == EntityType.Invalid)
 			{
 				Debug.LogError("Could not find entity with name '" + name + "' in Card.cs");
 			}

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum EventType
 {
-    None,
+    Invalid,
 	Attack,
 	Damage,
     Minion,
@@ -12,24 +12,6 @@ public enum EventType
     Draw,
     TurnBegin,
     TurnEnd,
-
-    //None,
-
-	//PlayMinion,
-	//PlaySpell,
-    //Damage,
-
-	//DamageMinion,
-	//DamageCharacter,
-    //HealMinion,
-    //HealCharacter,
-	//DrawCard,
-	//TurnBegin,
-	//TurnEnd,
-    //Damage,
-    //Heal,
-    //SummonMinion,
-    //DrawCard,
 }
 public enum EventTarget
 {
@@ -37,16 +19,15 @@ public enum EventTarget
     Minion,
     Character,
     Board,
-    //Random,
 }
+// Modifier - random, ect..?
 
 [System.Serializable]
-public class Event {
+public struct Event {
     //public string name = "test_0";
 
     // only reference string name, put event type targeting ect.. in data thingy
     public EventType type;
-    //public string data;
     public EventTarget target;
     public string data;
 
