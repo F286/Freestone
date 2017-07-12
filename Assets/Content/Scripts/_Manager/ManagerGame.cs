@@ -25,13 +25,13 @@ public class ManagerGame : MonoBehaviour {
         print("b " + b.name);
 
         //print(a.events.Count);
-        var isTargetable = a.events.Find(_ => _.target == EventTarget.Minion 
-                                         || _.target == EventTarget.Character) != null;
+        var targetableEvent = a.events.Find(_ => _.target == EventTarget.Minion 
+                                         || _.target == EventTarget.Character);
 
-        print(isTargetable);
+        print(targetableEvent);
 
-        if(isTargetable && b != Instance.empty) {
-            
+        if(targetableEvent != null && b != Instance.empty) {
+            sequence.children.Add(targetableEvent);
         }
     }
     public void DragCard(GestureState state, Graphic card) {
