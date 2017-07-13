@@ -16,7 +16,7 @@ public class Character {
 
     public Entity entity {
         get {
-            var r = Data.instance.getEntity(name);
+            var r = DataHolder.instance.getEntity(name);
             if (r.type == EntityType.Invalid) {
                 Debug.LogError("Could not find entity with name '" + name + "' in Character.cs");
             }

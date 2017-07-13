@@ -2,8 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Data : MonoBehaviour {
-	public static Data instance;
+[System.Serializable]
+public class Data {
+	//public string name;
+	public List<string> data;
+
+	public List<Data> children;
+}
+
+public class DataHolder : MonoBehaviour {
+	public static DataHolder instance;
 
     //[System.Serializable]
     //public class Minion
@@ -26,6 +34,7 @@ public class Data : MonoBehaviour {
     public void Awake() {
         instance = this;
     }
+	public Data data;
 
     public List<Entity> entities;
 
