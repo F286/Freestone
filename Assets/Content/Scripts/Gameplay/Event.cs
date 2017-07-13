@@ -65,5 +65,8 @@ public class Event {
         }
 
         return copy;
-    }
+	}
+	public override string ToString() {
+		return "Event: " + type + " " + target + " " + data + " " + a + " " + b;
+	}
 }

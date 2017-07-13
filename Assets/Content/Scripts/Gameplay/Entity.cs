@@ -38,7 +38,6 @@ public class Entity {
 
     public List<Event> events;
 
-
     public Entity clone() {
         var copy = new Entity();
 
@@ -65,5 +64,10 @@ public class Entity {
         }
 
         return copy;
-    }
+	}
+	public override string ToString() {
+		return "Entity: " + name + " " + type + " " + location + " " + manaCost + " " + title + " " + description
+			+ " " + art + " " + attack + " " + attackMax + " " + health + " " + healthMax + " "
+			+ controller + " " + index + " " + events;
+	}
 }

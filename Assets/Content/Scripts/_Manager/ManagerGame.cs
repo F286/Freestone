@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class ManagerGame : MonoBehaviour {
     public static ManagerGame instance;
-    public Event sequence;
-    //public List<Character> characters;
+    public List<Event> sequence;
     public List<Entity> instances;
-    //static Instance empty = new Instance();
 
     public void Awake() {
         instance = this;
@@ -19,19 +17,19 @@ public class ManagerGame : MonoBehaviour {
         print("on end turn");
     }
     public void TakeAction(int a, int b) {
-        //var a = instanceA;
-        //var b = instanceB;
-        //print("a " + a.name);
-        //print("b " + b.name);
-
-        //print(a.events.Count);
-        var target = instances[a].events.Find(_ => _.target == EventTarget.Minion || 
+		if (a == b) {
+			return;
+		}
+        var targetable = instances[a].events.Find(_ => _.target == EventTarget.Minion || 
                                               _.target == EventTarget.Character);
 
-        print(target);
-
-        if(target.type == EventType.Invalid && b != -1) {
-            sequence.children.Add(target);
+		print(targetable);
+		print(b);
+        if(targetable.type != EventType.Invalid && b != -1) {
+			var c = targetable.clone();
+			c.a = a;
+			c.b = b;
+            sequence.Add(c);
         }
     }
     public void DragCard(GestureState state, Graphic card) {
