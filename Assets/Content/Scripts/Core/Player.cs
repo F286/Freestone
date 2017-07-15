@@ -7,4 +7,8 @@ public class Player : MonoBehaviour {
 	public GameObject hand;
 	public GameObject board;
 	public GameObject deck;
+	public GameObject graphicHand;
+	public GameObject graphicBoard;
+	public GameObject graphicDeck;
+	//public PlayerGraphics graphics;
 }

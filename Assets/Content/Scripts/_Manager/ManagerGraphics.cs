@@ -9,32 +9,15 @@ public class ManagerGraphics : MonoBehaviour {
 	public List<Arc> hands;
 
 	public void updateGraphics(ManagerGame game) {
-		// Destroy all children
-		for (int i = transform.childCount - 1; i >= 0; i--) {
-			DestroyImmediate(transform.GetChild(i).gameObject);
+		// Destroy previous graphics
+		for (int i = 0; i < 2; i++) {
+			DestoryAllChildren(game.players[i].graphicHand);
+			DestoryAllChildren(game.players[i].graphicBoard);
+			DestoryAllChildren(game.players[i].graphicDeck);
 		}
-		//foreach (Transform child in transform) {
-		//	Destroy(child.gameObject);
-		//}
-		//transform.DetachChildren();
 
 		// Iterate over each controller
 		for (int controllerIndex = 0; controllerIndex < 2; controllerIndex++) {
-			// Add all minions to board
-			var board = game.players[controllerIndex].board.transform;
-
-			for (int i = 0; i < board.childCount; i++) {
-				var item = board.GetChild(i);
-				var t = 0.5f;
-				if (board.childCount > 1) {
-					t += i * (1f / 6f);
-					t -= ((board.childCount - 1f) / 6f) / 2f;
-				}
-				var position = boards[controllerIndex].evaluate(t);
-				var card = Instantiate(Resources.Load("Prefab Minion"), position, Quaternion.identity, transform);
-				(card as GameObject).GetComponent<GraphicMinion>().source = item.gameObject;
-			}
-
 			// Add all cards to hand
 			var hand = game.players[controllerIndex].hand.transform;
 
@@ -46,10 +29,33 @@ public class ManagerGraphics : MonoBehaviour {
 					t -= ((hand.childCount - 1f) / 6f) / 2f;
 				}
 				var position = hands[controllerIndex].evaluate(t);
-				var card = Instantiate(Resources.Load("Prefab Card"), position, Quaternion.identity, transform);
-				(card as GameObject).GetComponent<GraphicCard>().source = item.gameObject;
+				var tr = game.players[controllerIndex].graphicHand.transform;
+				var card = Instantiate(Resources.Load("Prefab Card") as GameObject, position, Quaternion.identity, tr);
+				card.GetComponent<GraphicCard>().source = item.gameObject;
+			}
+			// Add all minions to board
+			var board = game.players[controllerIndex].board.transform;
+
+			for (int i = 0; i < board.childCount; i++) {
+				var item = board.GetChild(i);
+				var t = 0.5f;
+				if (board.childCount > 1) {
+					t += i * (1f / 6f);
+					t -= ((board.childCount - 1f) / 6f) / 2f;
+				}
+				var position = boards[controllerIndex].evaluate(t);
+				var tr = game.players[controllerIndex].graphicBoard.transform;
+				var card = Instantiate(Resources.Load("Prefab Minion") as GameObject, position, Quaternion.identity, tr);
+				card.GetComponent<GraphicMinion>().source = item.gameObject;
 			}
 		}
 
+	}
+
+	void DestoryAllChildren(GameObject g) {
+		var t = g.transform;
+		for (int i = t.childCount - 1; i >= 0; i--) {
+			DestroyImmediate(t.GetChild(i).gameObject);
+		}
 	}
 }
