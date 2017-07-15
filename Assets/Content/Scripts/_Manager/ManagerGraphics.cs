@@ -7,6 +7,7 @@ public class ManagerGraphics : MonoBehaviour {
 	public List<Graphic> graphics;
 	public List<Arc> boards;
 	public List<Arc> hands;
+	public List<Arc> heroes;
 
 	public void updateGraphics(ManagerGame game) {
 		// Destroy previous graphics
@@ -14,6 +15,7 @@ public class ManagerGraphics : MonoBehaviour {
 			DestoryAllChildren(game.players[i].graphicHand);
 			DestoryAllChildren(game.players[i].graphicBoard);
 			DestoryAllChildren(game.players[i].graphicDeck);
+			DestoryAllChildren(game.players[i].graphicHero);
 		}
 
 		// Iterate over each controller
@@ -50,6 +52,17 @@ public class ManagerGraphics : MonoBehaviour {
 				graphic.GetComponent<GraphicMinion>().source = item.gameObject;
 				graphic.GetComponent<Graphic>().UpdateGraphics(item.GetComponent<EntityData>());
 			}
+			// Add hero
+			{
+				var item = game.players[controllerIndex].hero.transform.GetChild(0);
+				var t = 0.5f;
+				var position = heroes[controllerIndex].evaluate(t);
+				var tr = game.players[controllerIndex].graphicHero.transform;
+				var graphic = Instantiate(Resources.Load("Prefab Hero") as GameObject, position, Quaternion.identity, tr);
+				graphic.GetComponent<GraphicMinion>().source = item.gameObject;
+				graphic.GetComponent<Graphic>().UpdateGraphics(item.GetComponent<EntityData>());
+			}
+
 		}
 
 	}
