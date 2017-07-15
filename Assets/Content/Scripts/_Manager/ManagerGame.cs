@@ -23,7 +23,18 @@ public class ManagerGame : MonoBehaviour {
 	public List<Player> players;
 	public GameObject game;
 
-	public int currentPlayer;
+	public int currentPlayerIndex;
+
+	public Player currentPlayer {
+		get {
+			return players[currentPlayerIndex];
+		}
+	}
+	public EntityData currentHero {
+		get {
+			return players[currentPlayerIndex].hero.transform.GetChild(0).GetComponent<EntityData>();
+		}
+	}
 
     public void Awake() {
         instance = this;
@@ -39,7 +50,7 @@ public class ManagerGame : MonoBehaviour {
 	public void EndTurn() {
 		game.TriggerGlobalEvent(GlobalEventName.EndTurn);
 		EndPhase();
-		currentPlayer = (currentPlayer + 1) % 2;
+		currentPlayerIndex = (currentPlayerIndex + 1) % 2;
 
 		game.TriggerGlobalEvent(GlobalEventName.BeginTurn);
 		EndPhase();

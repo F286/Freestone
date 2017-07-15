@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -31,7 +31,7 @@ public class EntityData : MonoBehaviour {
 
 	public bool isFriendly {
 		get {
-			return GetComponentInParent<Player>().number == ManagerGame.instance.currentPlayer;
+			return GetComponentInParent<Player>().number == ManagerGame.instance.currentPlayerIndex;
 		}
 	}
 	public Player player {

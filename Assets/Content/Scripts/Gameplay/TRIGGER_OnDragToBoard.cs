@@ -21,8 +21,11 @@ public class TRIGGER_OnDragToBoard : MonoBehaviour, ITrigger, IOnInput {
 	}
 
 	public void OnInput(InputState state) {
-		if (transform.parent.name == "hand" && GetComponent<EntityData>().isFriendly) {
-			//print(state.gesture.phase);
+		var entity = GetComponent<EntityData>();
+		if (transform.parent.name == "hand" && 
+		    GetComponent<EntityData>().isFriendly && 
+		    ManagerGame.instance.currentHero.mana >= entity.manaCost) {
+			
 			state.graphic.transform.position = state.gesture.worldPosition;
 
 			if (state.gesture.phase == GesturePhase.End) {
@@ -40,12 +43,8 @@ public class TRIGGER_OnDragToBoard : MonoBehaviour, ITrigger, IOnInput {
 				transform.parent = player.board.transform;
 				transform.SetSiblingIndex(targetSiblingIndex);
 
-				// make easier way to access hero ect.. probably this stuff shouldn't be stored as strings.
-				//this stuff should be in ACTION_PlayMinion?
-				//GetComponentInParent<Player>().
-				var entity = GetComponent<EntityData>();
-				//print(entity.player.GetComponent<EntityData>());
-				entity.player.hero.transform.GetChild(0).GetComponent<EntityData>().mana -= entity.manaCost;
+				// Subtract mana cost
+				ManagerGame.instance.currentHero.mana -= entity.manaCost;
 
 				state.manager.EndPhase();
 			}
