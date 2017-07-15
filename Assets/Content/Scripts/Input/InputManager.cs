@@ -12,6 +12,7 @@ public struct GestureState {
     public GesturePhase phase;
     public GameObject a;
     public GameObject b;
+	public Vector2 worldPosition;
 }
 public interface IOnTouch {
     void OnTouch(GestureState state);
@@ -42,6 +43,7 @@ public class InputManager : MonoBehaviour {
 			state.phase = phase;
 			state.a = current;
 			state.b = GetOverlap();
+			state.worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			//print("input " + phase);
 			//print("input " + current);
 			current.SendMessage("OnTouch", state, SendMessageOptions.DontRequireReceiver);
