@@ -28,4 +28,31 @@ public class EntityData : MonoBehaviour {
 			}
 		}
 	}
+
+	public bool isFriendly {
+		get {
+			return GetComponentInParent<Player>().number == ManagerGame.instance.currentPlayer;
+		}
+	}
+	public Player player {
+		get {
+			return GetComponentInParent<Player>();
+		}
+	}
+	public int manaCost {
+		get {
+			return int.Parse(Get("mana_cost"));
+		}
+		set {
+			Set("mana_cost", value.ToString());
+		}
+	}
+	public int mana {
+		get {
+			return int.Parse(Get("mana"));
+		}
+		set {
+			Set("mana", value.ToString());
+		}
+	}
 }
