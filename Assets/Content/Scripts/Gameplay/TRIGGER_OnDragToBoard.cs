@@ -40,7 +40,11 @@ public class TRIGGER_OnDragToBoard : MonoBehaviour, ITrigger, IOnInput {
 				transform.parent = player.board.transform;
 				transform.SetSiblingIndex(targetSiblingIndex);
 
-				state.manager.OnEndPhase();
+
+				//this stuff should be in ACTION_PlayMinion?
+				//GetComponentInParent<Player>().
+
+				state.manager.EndPhase();
 			}
 		}
 	}

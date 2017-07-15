@@ -3,10 +3,42 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TRIGGER_OnGlobalEvent : MonoBehaviour, ITrigger {
-	public string eventName;
+public enum GlobalEventName {
+	Any,
+	BeginTurn,
+	EndTurn,
+}
+public interface IOnGlobalEvent {
+	GlobalEventName globalEventName {
+		get;
+	}
+	void OnGlobalEvent(GlobalEventName eventName);
+}
+
+public class TRIGGER_OnGlobalEvent : MonoBehaviour, ITrigger, IOnGlobalEvent {
+	public GlobalEventName eventName;
+
+	public GlobalEventName globalEventName {
+		get {
+			return eventName;
+		}
+	}
 
 	public void ExternalTrigger() {
 		this.TriggerEvent();
+	}
+
+	public void OnGlobalEvent(GlobalEventName eventName) {
+		print("on global event");
+	}
+}
+
+public static class GlobalEventExtensions {
+	public static void TriggerGlobalEvent(this GameObject trigger, GlobalEventName eventName) {
+		foreach (var item in trigger.GetComponentsInChildren<IOnGlobalEvent>()) {
+			if (item.globalEventName == GlobalEventName.Any || eventName == item.globalEventName) {
+				item.OnGlobalEvent(eventName);
+			}
+		}
 	}
 }

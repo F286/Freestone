@@ -10,6 +10,8 @@ public class Button : MonoBehaviour, IOnTouch
 
     public void OnTouch(GestureState state)
 	{
-		target.SendMessage(methodName);
+		if (state.phase == GesturePhase.End) {
+			target.SendMessage(methodName);
+		}
     }
 }

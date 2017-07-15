@@ -20,4 +20,12 @@ public class EntityData : MonoBehaviour {
 		}
 		return "";
 	}
+	public void Set(string name, string setTo) {
+		for (int i = 0; i < attributes.Count; i++) {
+			if(attributes[i].type == name) {
+				attributes[i].data = setTo;
+				break;
+			}
+		}
+	}
 }

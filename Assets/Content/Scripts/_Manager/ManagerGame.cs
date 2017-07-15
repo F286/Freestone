@@ -21,41 +21,34 @@ public class ManagerGame : MonoBehaviour {
     public static ManagerGame instance;
 	public GameObject sequence;
 	public List<Player> players;
+	public GameObject game;
+
+	public int currentPlayer;
 
     public void Awake() {
         instance = this;
     }
     public void Start() {
-        GetComponent<ManagerGraphics>().updateGraphics(this);
+
+		BeginTurn();
+		EndPhase();
+	}
+	public void BeginTurn() {
+		game.TriggerGlobalEvent(GlobalEventName.BeginTurn);
+	}
+	public void EndTurn() {
+		game.TriggerGlobalEvent(GlobalEventName.EndTurn);
+		EndPhase();
+		currentPlayer = (currentPlayer + 1) % 2;
+
+		game.TriggerGlobalEvent(GlobalEventName.BeginTurn);
+		EndPhase();
     }
-    public void OnEndTurn() {
-        print("on end turn");
-    }
-	public void OnEndPhase() {
+	public void EndPhase() {
 		GetComponent<ManagerGraphics>().updateGraphics(this);
 	}
-  //  public void TakeAction(int a, int b) {
-		//if (a == b) {
-		//	return;
-		//}
-  ////      var targetable = instances[a].events.Find(_ => _.target == EventTarget.Minion || 
-  ////                                            _.target == EventTarget.Character);
-
-		////print(targetable);
-		////print(b);
-   ////     if(targetable.type != EventType.Invalid && b != -1) {
-			////var c = targetable.clone();
-			////c.a = a;
-			////c.b = b;
-    //    //    sequence.Add(c);
-    //    //}
-    //}
     public void DragCard(GestureState state, Graphic graphic) {
 		graphic.source.SendMessage("OnInput", new InputState(this, state, graphic), 
 		                           SendMessageOptions.DontRequireReceiver);
-        //if (state.phase == GesturePhase.End) {
-        //    //TakeAction(state.a == null ? -1 : state.a.GetComponent<Graphic>().index, 
-        //               //state.b == null ? -1 : state.b.GetComponent<Graphic>().index);
-        //}
     }
 }
