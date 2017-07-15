@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Graphic : MonoBehaviour, IOnTouch {
-	public int index;
+	public GameObject source;
 
     public void OnTouch(GestureState state)
 	{

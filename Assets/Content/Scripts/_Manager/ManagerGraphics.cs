@@ -8,50 +8,52 @@ public class ManagerGraphics : MonoBehaviour {
 	public List<Arc> boards;
 	public List<Arc> hands;
 
-    public void updateGraphics(List<Entity> entities) {
+	public void updateGraphics(ManagerGame game) {
 
-        for (int i = 0; i < entities.Count; i++)
-        {
-            entities[i].index = i;
-        }
+        //for (int i = 0; i < entities.Count; i++)
+        //{
+        //    entities[i].index = i;
+        //}
 
         // Iterate over each controller
         for (int controllerIndex = 0; controllerIndex < 2; controllerIndex++)
 		{
-            // Add all minions to board
-			var minions = entities.FindAll(_ => _.controller == controllerIndex
-                                        && _.location == EntityLocation.Board);
+			// Add all minions to board
+			//var minions = entities.FindAll(_ => _.controller == controllerIndex
+			//&& _.location == EntityLocation.Board);
+			//minions = game.boards[i].transform.childCount
 
-			for (int i = 0; i < minions.Count; i++)
-			{
-				var item = minions[i];
+			var board = game.boards[controllerIndex].transform;
+
+			for (int i = 0; i < board.childCount; i++) {
+				var item = board.GetChild(i);
 				var t = 0.5f;
-				if (minions.Count > 1)
+				if (board.childCount > 1)
 				{
                     t += i * (1f / 6f);
-                    t -= ((minions.Count - 1f) / 6f) / 2f;
+                    t -= ((board.childCount - 1f) / 6f) / 2f;
 				}
 				var position = boards[controllerIndex].evaluate(t);
 				var card = Instantiate(Resources.Load("Prefab Minion"), position, Quaternion.identity);
-                (card as GameObject).GetComponent<GraphicMinion>().index = item.index;
+				(card as GameObject).GetComponent<GraphicMinion>().source = item.gameObject;
 			}
 
 			// Add all cards to hand
-			var cardsFind = entities.FindAll(_ => _.controller == controllerIndex
-										  && _.location == EntityLocation.Hand);
+			//var cardsFind = entities.FindAll(_ => _.controller == controllerIndex
+										  //&& _.location == EntityLocation.Hand);
+			var hand = game.hands[controllerIndex].transform;
 
-			for (int i = 0; i < cardsFind.Count; i++)
-			{
-				var item = cardsFind[i];
+			for (int i = 0; i < hand.childCount; i++) {
+				var item = hand.GetChild(i);
 				var t = 0.5f;
-				if (minions.Count > 1)
+				if (hand.childCount > 1)
 				{
 					t += i * (1f / 6f);
-					t -= ((minions.Count - 1f) / 6f) / 2f;
+					t -= ((hand.childCount - 1f) / 6f) / 2f;
 				}
 				var position = hands[controllerIndex].evaluate(t);
 				var card = Instantiate(Resources.Load("Prefab Card"), position, Quaternion.identity);
-                (card as GameObject).GetComponent<GraphicCard>().index = item.index;
+				(card as GameObject).GetComponent<GraphicCard>().source = item.gameObject;
             }
 
         }

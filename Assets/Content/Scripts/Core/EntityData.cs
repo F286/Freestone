@@ -8,11 +8,8 @@ public class EntityDataObject {
 	public string data;
 }
 
-public class EntityData : MonoBehaviour, ITrigger {
+public class EntityData : MonoBehaviour {
 
 	public List<EntityDataObject> attributes;
 
-	public void Awake() {
-		this.TriggerEvent();
-	}
 }
