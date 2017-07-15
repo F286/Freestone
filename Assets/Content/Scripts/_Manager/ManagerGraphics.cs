@@ -30,8 +30,9 @@ public class ManagerGraphics : MonoBehaviour {
 				}
 				var position = hands[controllerIndex].evaluate(t);
 				var tr = game.players[controllerIndex].graphicHand.transform;
-				var card = Instantiate(Resources.Load("Prefab Card") as GameObject, position, Quaternion.identity, tr);
-				card.GetComponent<GraphicCard>().source = item.gameObject;
+				var graphic = Instantiate(Resources.Load("Prefab Card") as GameObject, position, Quaternion.identity, tr);
+				graphic.GetComponent<GraphicCard>().source = item.gameObject;
+				graphic.GetComponent<Graphic>().UpdateGraphics(item.GetComponent<EntityData>());
 			}
 			// Add all minions to board
 			var board = game.players[controllerIndex].board.transform;
@@ -45,8 +46,9 @@ public class ManagerGraphics : MonoBehaviour {
 				}
 				var position = boards[controllerIndex].evaluate(t);
 				var tr = game.players[controllerIndex].graphicBoard.transform;
-				var card = Instantiate(Resources.Load("Prefab Minion") as GameObject, position, Quaternion.identity, tr);
-				card.GetComponent<GraphicMinion>().source = item.gameObject;
+				var graphic = Instantiate(Resources.Load("Prefab Minion") as GameObject, position, Quaternion.identity, tr);
+				graphic.GetComponent<GraphicMinion>().source = item.gameObject;
+				graphic.GetComponent<Graphic>().UpdateGraphics(item.GetComponent<EntityData>());
 			}
 		}
 
