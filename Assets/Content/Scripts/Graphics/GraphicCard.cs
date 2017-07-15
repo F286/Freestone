@@ -11,10 +11,10 @@ public class GraphicCard : Graphic {
 	public TextMesh description;
 
 	public override void UpdateGraphics(EntityData entity) {
-		manaCost.text = "<b>" + entity.Get("mana_cost") + "</b>";
-		attack.text = "<b>" + entity.Get("attack") + "</b>";
-		health.text = "<b>" + entity.Get("health") + "</b>";
-		title.text = "<b>" + entity.Get("title") + "</b>";
-		description.text = "<b>" + entity.Get("description") + "</b>";
+		manaCost.text = 	Format(entity.Get("mana_cost") 	);
+		attack.text = 		Format(entity.Get("attack") 	);
+		health.text = 		Format(entity.Get("health")		);
+		title.text = 		Format(entity.Get("title") 		);
+		description.text = 	Format(entity.Get("description"));
 	}
 }

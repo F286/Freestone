@@ -8,7 +8,7 @@ public class GraphicMinion : Graphic {
 	public TextMesh health;
 
 	public override void UpdateGraphics(EntityData entity) {
-		attack.text = "<b>" + entity.Get("attack") + "</b>";
-		health.text = "<b>" + entity.Get("health") + "</b>";
+		attack.text = Format(entity.Get("attack"));
+		health.text = Format(entity.Get("health"));
 	}
 }

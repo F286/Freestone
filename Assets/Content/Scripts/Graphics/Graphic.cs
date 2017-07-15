@@ -12,4 +12,8 @@ public abstract class Graphic : MonoBehaviour, IOnTouch {
 		ManagerGame.instance.DragCard(state, this);
     }
 	public abstract void UpdateGraphics(EntityData entity);
+
+	public static string Format(string text) {
+		return "<b>" + text.Replace('/', '\n') + "</b>";
+	}
 }
