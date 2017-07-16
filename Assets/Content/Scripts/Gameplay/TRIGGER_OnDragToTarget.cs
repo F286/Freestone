@@ -18,7 +18,8 @@ public class TRIGGER_OnDragToTarget : MonoBehaviour, ITrigger, IOnInput {
 
 	public void OnInput(InputState state) {
 		var entity = GetComponent<EntityData>();
-		if (transform.parent.name == "board" && state.graphic != null) {
+		if (transform.parent.name == "board" && state.graphic != null && 
+		    GetComponent<EntityData>().isFriendly) {
 			var spriteRenderer = ManagerGame.instance.arrow.GetComponent<SpriteRenderer>();
 			if(state.gesture.phase == GesturePhase.Begin) {
 				ManagerGame.instance.arrow.gameObject.SetActive(true);
@@ -38,10 +39,5 @@ public class TRIGGER_OnDragToTarget : MonoBehaviour, ITrigger, IOnInput {
 			                                  spriteRenderer.size.y);
 		}
 
-			// &&
-			//GetComponent<EntityData>().isFriendly &&
-		//	ManagerGame.instance.currentHero.mana >= entity.manaCost) {
-
-		//}
 	}
 }
