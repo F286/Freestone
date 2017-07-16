@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IAction {
+public interface ITriggerAction {
+	
+}
+public interface IAction : ITriggerAction {
 	void OnEvent();
 }
