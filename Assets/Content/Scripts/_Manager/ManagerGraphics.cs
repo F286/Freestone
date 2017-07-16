@@ -55,6 +55,7 @@ public class ManagerGraphics : MonoBehaviour {
 				graphic.GetComponent<Graphic>().UpdateGraphics(item.GetComponent<EntityData>());
 			}
 			// Add hero
+			if (game.players[controllerIndex].hero.transform.childCount > 0)
 			{
 				var item = game.players[controllerIndex].hero.transform.GetChild(0);
 				var t = 0.5f;

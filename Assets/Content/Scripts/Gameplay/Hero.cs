@@ -11,12 +11,25 @@ public class Hero : MonoBehaviour, IOnGlobalEvent {
 	}
 
 	public void OnGlobalEvent(GlobalEventName eventName) {
-		if(eventName == GlobalEventName.BeginTurn && 
-		   GetComponentInParent<Player>().number == ManagerGame.instance.currentPlayerIndex) {
+		var player = GetComponentInParent<Player>();
+		// Start of Turn
+		if (eventName == GlobalEventName.BeginTurn && 
+		    player.number == ManagerGame.instance.currentPlayerIndex) {
+			
 			var entity = GetComponent<EntityData>();
 
+			// Increase mana
 			entity.maxMana = Math.Min(entity.maxMana + 1, 10);
 			entity.mana = entity.maxMana;
+
+			// Draw card
+			if (player.deck.transform.childCount > 0) {
+				player.deck.transform.GetChild(0).SetParent(player.hand.transform);
+			}
+		}
+		// Check if hero is dead
+		if (eventName == GlobalEventName.EndPhase && GetComponent<EntityData>().health <= 0) {
+			DestroyImmediate(gameObject);
 		}
 	}
 }
