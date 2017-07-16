@@ -22,6 +22,7 @@ public class ManagerGame : MonoBehaviour {
 	public GameObject sequence;
 	public List<Player> players;
 	public GameObject game;
+	public Transform arrow;
 
 	public int currentPlayerIndex;
 
@@ -38,6 +39,7 @@ public class ManagerGame : MonoBehaviour {
 
     public void Awake() {
         instance = this;
+		arrow.gameObject.SetActive(false);
     }
 	public void Start() {
 		EndPhase();
