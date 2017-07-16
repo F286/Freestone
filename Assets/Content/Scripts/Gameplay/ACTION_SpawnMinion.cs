@@ -7,9 +7,10 @@ public class ACTION_SpawnMinion : MonoBehaviour, IAction {
 	public string minionName;
 	public static int index;
 	public void OnEvent() {
-		var entity = ManagerData.instance.GetEntity(minionName);
+		var n = minionName == "" ? name : minionName;
+		var entity = ManagerData.instance.GetEntity(n);
 		var g = Instantiate(entity, transform.parent);
-		g.name = minionName + index;
+		g.name = n + index;
 		g.transform.SetSiblingIndex(transform.GetSiblingIndex());
 
 		index++;
