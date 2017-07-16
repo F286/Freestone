@@ -33,6 +33,7 @@ public class ManagerGraphics : MonoBehaviour {
 				var position = hands[controllerIndex].evaluate(t);
 				var tr = game.players[controllerIndex].graphicHand.transform;
 				var graphic = Instantiate(Resources.Load("Prefab Card") as GameObject, position, Quaternion.identity, tr);
+				graphic.name = item.name;
 				graphic.GetComponent<GraphicCard>().source = item.gameObject;
 				graphic.GetComponent<Graphic>().UpdateGraphics(item.GetComponent<EntityData>());
 			}
@@ -49,6 +50,7 @@ public class ManagerGraphics : MonoBehaviour {
 				var position = boards[controllerIndex].evaluate(t);
 				var tr = game.players[controllerIndex].graphicBoard.transform;
 				var graphic = Instantiate(Resources.Load("Prefab Minion") as GameObject, position, Quaternion.identity, tr);
+				graphic.name = item.name;
 				graphic.GetComponent<GraphicMinion>().source = item.gameObject;
 				graphic.GetComponent<Graphic>().UpdateGraphics(item.GetComponent<EntityData>());
 			}
@@ -59,6 +61,7 @@ public class ManagerGraphics : MonoBehaviour {
 				var position = heroes[controllerIndex].evaluate(t);
 				var tr = game.players[controllerIndex].graphicHero.transform;
 				var graphic = Instantiate(Resources.Load("Prefab Hero") as GameObject, position, Quaternion.identity, tr);
+				graphic.name = item.name;
 				graphic.GetComponent<GraphicMinion>().source = item.gameObject;
 				graphic.GetComponent<Graphic>().UpdateGraphics(item.GetComponent<EntityData>());
 			}

@@ -18,7 +18,7 @@ public class TRIGGER_OnDragToTarget : MonoBehaviour, ITrigger, IOnInput {
 
 	public void OnInput(InputState state) {
 		var entity = GetComponent<EntityData>();
-		if (transform.parent.name == "board" && state.graphic != null && 
+		if (transform.parent.name == "board" && state.graphic != null &&
 		    GetComponent<EntityData>().isFriendly) {
 			var spriteRenderer = ManagerGame.instance.arrow.GetComponent<SpriteRenderer>();
 			if(state.gesture.phase == GesturePhase.Begin) {
@@ -37,7 +37,22 @@ public class TRIGGER_OnDragToTarget : MonoBehaviour, ITrigger, IOnInput {
 			                                                       * (360f / (Mathf.PI * 2)));
 			spriteRenderer.size = new Vector2(diff.magnitude / spriteRenderer.transform.localScale.y, 
 			                                  spriteRenderer.size.y);
+
+			if (state.gesture.b != null) {
+				//print(GameObjectToPath(state.gesture.b));
+				entity.Set("target", GameObjectToPath(state.gesture.b));
+				//this.TriggerEvent();
+				//state.manager.EndPhase();
+			}
 		}
 
+	}
+	public static string GameObjectToPath(GameObject gameObject) {
+		return gameObject.transform.parent.parent.name + "/" + 
+			   gameObject.transform.parent.name + "/" +
+			   gameObject.transform.name;
+	}
+	public static GameObject PathToGameObject(string path) {
+		return ManagerGame.instance.game.transform.Find(path).gameObject;
 	}
 }

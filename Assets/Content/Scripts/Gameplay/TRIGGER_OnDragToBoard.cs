@@ -28,9 +28,9 @@ public class TRIGGER_OnDragToBoard : MonoBehaviour, ITrigger, IOnInput {
 					}
 					targetSiblingIndex++;
 				}
+
 				entity.Set("position", targetSiblingIndex.ToString());
 				this.TriggerEvent();
-
 				state.manager.EndPhase();
 			}
 		}
