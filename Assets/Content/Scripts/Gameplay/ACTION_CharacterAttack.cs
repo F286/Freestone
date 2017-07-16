@@ -15,5 +15,7 @@ public class ACTION_CharacterAttack : MonoBehaviour, IAction {
 		targetEntity.health -= entity.attack;
 
 		entity.canAttack = false;
+
+		ManagerGame.instance.EndPhase();
 	}
 }

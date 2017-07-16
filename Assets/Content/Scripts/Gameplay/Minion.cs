@@ -11,11 +11,15 @@ public class Minion : MonoBehaviour, IOnGlobalEvent {
 	}
 
 	public void OnGlobalEvent(GlobalEventName eventName) {
-		if(eventName == GlobalEventName.BeginTurn && 
-		   transform.parent.name == "board" &&
-		   GetComponentInParent<Player>().number == ManagerGame.instance.currentPlayerIndex) {
+		if (transform.parent.name == "board") {
+			if (eventName == GlobalEventName.BeginTurn &&
+			   GetComponentInParent<Player>().number == ManagerGame.instance.currentPlayerIndex) {
 
-			GetComponent<EntityData>().canAttack = true;
+				GetComponent<EntityData>().canAttack = true;
+			}
+			if (eventName == GlobalEventName.EndPhase && GetComponent<EntityData>().health <= 0) {
+				DestroyImmediate(gameObject);
+			}
 		}
 	}
 }
