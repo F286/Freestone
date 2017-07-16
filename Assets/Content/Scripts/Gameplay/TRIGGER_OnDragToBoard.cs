@@ -39,12 +39,8 @@ public class TRIGGER_OnDragToBoard : MonoBehaviour, ITrigger, IOnInput {
 					}
 					targetSiblingIndex++;
 				}
-				// Set parent and sibling index
-				transform.parent = player.board.transform;
-				transform.SetSiblingIndex(targetSiblingIndex);
-
-				// Subtract mana cost
-				ManagerGame.instance.currentHero.mana -= entity.manaCost;
+				entity.Set("position", targetSiblingIndex.ToString());
+				this.TriggerEvent();
 
 				state.manager.EndPhase();
 			}

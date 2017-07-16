@@ -24,9 +24,13 @@ public class EntityData : MonoBehaviour {
 		for (int i = 0; i < attributes.Count; i++) {
 			if(attributes[i].type == name) {
 				attributes[i].data = setTo;
-				break;
+				return;
 			}
 		}
+		var data = new EntityDataObject();
+		data.type = name;
+		data.data = setTo;
+		attributes.Add(data);
 	}
 
 	public bool isFriendly {
