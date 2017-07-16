@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hero : MonoBehaviour, IOnGlobalEvent {
+public class Minion : MonoBehaviour, IOnGlobalEvent {
 	public GlobalEventName globalEventName {
 		get {
 			return GlobalEventName.Any;
@@ -12,11 +12,10 @@ public class Hero : MonoBehaviour, IOnGlobalEvent {
 
 	public void OnGlobalEvent(GlobalEventName eventName) {
 		if(eventName == GlobalEventName.BeginTurn && 
+		   transform.parent.name == "board" &&
 		   GetComponentInParent<Player>().number == ManagerGame.instance.currentPlayerIndex) {
-			var entity = GetComponent<EntityData>();
 
-			entity.maxMana = Math.Min(entity.maxMana + 1, 10);
-			entity.mana = entity.maxMana;
+			GetComponent<EntityData>().canAttack = true;
 		}
 	}
 }

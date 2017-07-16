@@ -59,4 +59,36 @@ public class EntityData : MonoBehaviour {
 			Set("mana", value.ToString());
 		}
 	}
+	public int maxMana {
+		get {
+			return int.Parse(Get("max_mana"));
+		}
+		set {
+			Set("max_mana", value.ToString());
+		}
+	}
+	public int attack {
+		get {
+			return int.Parse(Get("attack"));
+		}
+		set {
+			Set("attack", value.ToString());
+		}
+	}
+	public int health {
+		get {
+			return int.Parse(Get("health"));
+		}
+		set {
+			Set("health", value.ToString());
+		}
+	}
+	public bool canAttack {
+		get {
+			return Get("can_attack") == "True";
+		}
+		set {
+			Set("can_attack", value.ToString());
+		}
+	}
 }
