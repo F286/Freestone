@@ -11,7 +11,6 @@ public class Hero : MonoBehaviour, IOnGlobalEvent {
 	}
 
 	public void OnGlobalEvent(GlobalEventName eventName) {
-		//print(eventName);
 		if(eventName == GlobalEventName.BeginTurn && 
 		   GetComponentInParent<Player>().number == ManagerGame.instance.currentPlayerIndex) {
 			var maxManaRaw = GetComponent<EntityData>().Get("max_mana");

@@ -7,6 +7,7 @@ public enum GlobalEventName {
 	Any,
 	BeginTurn,
 	EndTurn,
+	EndPhase,
 }
 public interface IOnGlobalEvent {
 	GlobalEventName globalEventName {
@@ -29,7 +30,9 @@ public class TRIGGER_OnGlobalEvent : MonoBehaviour, ITrigger, IOnGlobalEvent {
 	}
 
 	public void OnGlobalEvent(GlobalEventName eventName) {
-		print("on global event");
+		//print(eventName);
+		//print(this);
+		this.TriggerEvent();
 	}
 }
 

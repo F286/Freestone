@@ -39,8 +39,8 @@ public class ManagerGame : MonoBehaviour {
     public void Awake() {
         instance = this;
     }
-    public void Start() {
-
+	public void Start() {
+		EndPhase();
 		BeginTurn();
 		EndPhase();
 	}
@@ -56,6 +56,7 @@ public class ManagerGame : MonoBehaviour {
 		EndPhase();
     }
 	public void EndPhase() {
+		game.TriggerGlobalEvent(GlobalEventName.EndPhase);
 		GetComponent<ManagerGraphics>().updateGraphics(this);
 	}
     public void DragCard(GestureState state, Graphic graphic) {
