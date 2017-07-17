@@ -25,8 +25,6 @@ public interface IOnTouch {
 }
 public class InputManager : MonoBehaviour {
 	public GameObject current;
-	//public GameObject current;
-	//public Transform battlecry;
 	public GestureType type;
 
     public void Awake() {
@@ -36,40 +34,26 @@ public class InputManager : MonoBehaviour {
 		var phase = GesturePhase.None;
 
 		switch (type) {
+			
 			case GestureType.Drag:
-
 			if (Input.GetMouseButtonDown(0)) {
 				phase = GesturePhase.Begin;
 				current = GetOverlap();
-				//print("set");
-				//battlecry = current.transform;
 			} else if (Input.GetMouseButtonUp(0)) {
 				phase = GesturePhase.End;
 			} else if (Input.GetMouseButton(0)) {
 				phase = GesturePhase.Update;
 			}
-
 			break;
-			case GestureType.Battlecry:
 
-			//print(current);
-			//if (phase == GesturePhase.End) {
-			//	phase = GesturePhase.Begin;
-			//} else if (phase == GesturePhase.Begin) {
-			//	phase = GesturePhase.Update;
-			//}
+			case GestureType.Battlecry:
 			phase = GesturePhase.Update;
 			if (Input.GetMouseButtonUp(0)) {
 				phase = GesturePhase.End;
 			}
-
 			break;
 		}
-
-		//print(battlecry);
-		//print("type " + type + "   phase " + phase + "   current " + current);
 		if (phase != GesturePhase.None && current != null) {
-
 			print("start " + current);
             var state = new GestureState();
 			state.phase = phase;
