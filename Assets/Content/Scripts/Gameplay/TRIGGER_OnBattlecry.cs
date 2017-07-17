@@ -39,6 +39,7 @@ public class TRIGGER_OnBattlecry : MonoBehaviour, ITrigger, IOnInput {
 
 
 			if (state.gesture.b != null && state.gesture.phase == GesturePhase.End) {
+				entity.Set("target", Core.GameObjectToPath(state.gesture.b.gameObject));
 				this.TriggerEvent();
 				state.manager.EndPhase();
 				state.gesture.setType(GestureType.Drag);
