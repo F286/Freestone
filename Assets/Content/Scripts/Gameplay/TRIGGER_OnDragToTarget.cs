@@ -35,19 +35,11 @@ public class TRIGGER_OnDragToTarget : MonoBehaviour, ITrigger, IOnInput {
 
 			if (state.gesture.b != null && state.gesture.phase == GesturePhase.End) {
 				//print(GameObjectToPath(state.gesture.b));
-				entity.Set("target", GameObjectToPath(state.gesture.b));
+				entity.Set("target", Core.GameObjectToPath(state.gesture.b.gameObject));
 				this.TriggerEvent();
 				state.manager.EndPhase();
 			}
 		}
 
-	}
-	public static string GameObjectToPath(GameObject gameObject) {
-		return gameObject.transform.parent.parent.name + "/" + 
-			   gameObject.transform.parent.name + "/" +
-			   gameObject.transform.name;
-	}
-	public static GameObject PathToGameObject(string path) {
-		return ManagerGame.instance.game.transform.Find(path).gameObject;
 	}
 }

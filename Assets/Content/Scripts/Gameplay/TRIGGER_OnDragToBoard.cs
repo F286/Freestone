@@ -10,6 +10,7 @@ public class TRIGGER_OnDragToBoard : MonoBehaviour, ITrigger, IOnInput {
 	}
 
 	public void OnInput(InputState state) {
+		//print("drag to board");
 		var entity = GetComponent<EntityData>();
 		if (transform.parent.name == "hand" && 
 		    GetComponent<EntityData>().isFriendly && 

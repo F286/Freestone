@@ -14,8 +14,8 @@ public enum GesturePhase {
 }
 public struct GestureState {
     public GesturePhase phase;
-    public GameObject a;
-    public GameObject b;
+    public Graphic a;
+    public Graphic b;
 	public Vector2 worldPosition;
 	public GestureType type;
 	public System.Action<GestureType> setType;
@@ -24,7 +24,7 @@ public interface IOnTouch {
     void OnTouch(GestureState state);
 }
 public class InputManager : MonoBehaviour {
-	public GameObject current;
+	public EntityData current;
 	public GestureType type;
 
     public void Awake() {
@@ -38,7 +38,7 @@ public class InputManager : MonoBehaviour {
 			case GestureType.Drag:
 			if (Input.GetMouseButtonDown(0)) {
 				phase = GesturePhase.Begin;
-				current = GetOverlap();
+				current = GetOverlap().GetComponent<Graphic>().source.GetComponent<EntityData>();
 			} else if (Input.GetMouseButtonUp(0)) {
 				phase = GesturePhase.End;
 			} else if (Input.GetMouseButton(0)) {
@@ -54,17 +54,23 @@ public class InputManager : MonoBehaviour {
 			break;
 		}
 		if (phase != GesturePhase.None && current != null) {
-			print("start " + current);
+			//print("start " + current);
             var state = new GestureState();
 			state.phase = phase;
-			state.a = current;
-			state.b = GetOverlap();
+			var path = Core.GameObjectToPath(current.gameObject);
+			var graphic = Core.PathToGraphic(path);
+			//print(path);
+			//print(graphic);
+			state.a = graphic;
+			var overlap = GetOverlap();
+			state.b = overlap == null ? null : overlap.GetComponent<Graphic>();
 			state.worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			state.type = type;
 			state.setType = SetGestureType;
-			current.SendMessage("OnTouch", state, SendMessageOptions.DontRequireReceiver);
+			//print(current);
+			graphic.SendMessage("OnTouch", state, SendMessageOptions.DontRequireReceiver);
 
-			print(current);
+			//print(current);
 		}
 	}
 	void SetGestureType(GestureType gestureType) {

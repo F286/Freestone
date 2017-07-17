@@ -9,10 +9,13 @@ public static class Core {
 			   gameObject.transform.parent.name + "/" +
 			   gameObject.transform.name;
 	}
-	public static GameObject PathToGameObjectGame(string path) {
-		return ManagerGame.instance.game.transform.Find(path).gameObject;
+	public static EntityData PathToEntity(string path) {
+		return ManagerGame.instance.game.transform.Find(path).gameObject.GetComponent<EntityData>();
 	}
-	public static GameObject PathToGameObjectGraphics(string path) {
-		return ManagerGame.instance.graphics.transform.Find(path).gameObject;
+	public static Graphic PathToGraphic(string path) {
+		return ManagerGame.instance.graphics.transform.Find(path).gameObject.GetComponent<Graphic>();
 	}
+	//public static GameObject PathToGameObjectGraphics(string path) {
+	//	return ManagerGame.instance.graphics.transform.Find(path).gameObject;
+	//}
 }
