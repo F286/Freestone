@@ -15,6 +15,8 @@ public class TRIGGER_OnDragToTarget : MonoBehaviour, ITrigger, IOnInput {
 		var entity = GetComponent<EntityData>();
 		if (transform.parent.name == "board" && state.graphic != null &&
 		    GetComponent<EntityData>().isFriendly && entity.canAttack) {
+			
+			// Arrow
 			var spriteRenderer = ManagerGame.instance.arrow.GetComponent<SpriteRenderer>();
 			if(state.gesture.phase == GesturePhase.Begin) {
 				ManagerGame.instance.arrow.gameObject.SetActive(true);
@@ -22,7 +24,6 @@ public class TRIGGER_OnDragToTarget : MonoBehaviour, ITrigger, IOnInput {
 			else if (state.gesture.phase == GesturePhase.End) {
 				ManagerGame.instance.arrow.gameObject.SetActive(false);
 			}
-
 			var a = (Vector2)state.graphic.transform.position;
 			var b = state.gesture.worldPosition;
 			var diff = b - a;
@@ -32,9 +33,9 @@ public class TRIGGER_OnDragToTarget : MonoBehaviour, ITrigger, IOnInput {
 			                                                       * (360f / (Mathf.PI * 2)));
 			spriteRenderer.size = new Vector2(diff.magnitude / spriteRenderer.transform.localScale.y, 
 			                                  spriteRenderer.size.y);
+			
 
 			if (state.gesture.b != null && state.gesture.phase == GesturePhase.End) {
-				//print(GameObjectToPath(state.gesture.b));
 				entity.Set("target", Core.GameObjectToPath(state.gesture.b.gameObject));
 				this.TriggerEvent();
 				state.manager.EndPhase();
@@ -42,4 +43,5 @@ public class TRIGGER_OnDragToTarget : MonoBehaviour, ITrigger, IOnInput {
 		}
 
 	}
+
 }

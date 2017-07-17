@@ -6,6 +6,6 @@ using UnityEngine;
 public class ACTION_Print : MonoBehaviour, IAction {
 	public string message;
 	public void OnEvent() {
-		Debug.Log(message);
+		//Debug.Log(message);
 	}
 }

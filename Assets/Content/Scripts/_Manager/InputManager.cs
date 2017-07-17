@@ -27,6 +27,7 @@ public class InputManager : MonoBehaviour {
 	public GameObject dragBegin;
 	public EntityData entity;
 	public GestureType type;
+	bool wasBattlecry = false;
 
     public void Awake() {
         Input.simulateMouseWithTouches = true;
@@ -37,6 +38,7 @@ public class InputManager : MonoBehaviour {
 		switch (type) {
 			
 			case GestureType.Drag:
+			wasBattlecry = false;
 			if (Input.GetMouseButtonDown(0)) {
 				phase = GesturePhase.Begin;
 				var overlap = GetOverlap();
@@ -56,7 +58,8 @@ public class InputManager : MonoBehaviour {
 			break;
 
 			case GestureType.Battlecry:
-			phase = GesturePhase.Update;
+			phase = wasBattlecry ? GesturePhase.Update : GesturePhase.Begin;
+			wasBattlecry = true;
 			if (Input.GetMouseButtonUp(0)) {
 				phase = GesturePhase.End;
 			}
@@ -76,13 +79,20 @@ public class InputManager : MonoBehaviour {
 				state.worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 				state.type = type;
 				state.setType = SetGestureType;
-				print(graphic);
+				//print(graphic);
 				graphic.SendMessage("OnTouch", state, SendMessageOptions.DontRequireReceiver);
 			}
 		}
 	}
 	void SetGestureType(GestureType gestureType) {
 		type = gestureType;
+
+		if(gestureType == GestureType.Battlecry) {
+			gameObject.TriggerGlobalEvent(GlobalEventName.GraphicsBattlecryStart);
+		}
+		else if (gestureType == GestureType.Drag) {
+			gameObject.TriggerGlobalEvent(GlobalEventName.GraphicsBattlecryEnd);
+		}
 	}
     GameObject GetOverlap() {
         var o = Physics2D.OverlapCircle(Camera.main.ScreenToWorldPoint(Input.mousePosition), 0.3f);

@@ -8,6 +8,8 @@ public enum GlobalEventName {
 	BeginTurn,
 	EndTurn,
 	EndPhase,
+	GraphicsBattlecryStart,
+	GraphicsBattlecryEnd,
 }
 public interface IOnGlobalEvent {
 	GlobalEventName globalEventName {
