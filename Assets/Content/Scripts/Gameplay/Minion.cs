@@ -18,7 +18,8 @@ public class Minion : MonoBehaviour, IOnGlobalEvent {
 				GetComponent<EntityData>().canAttack = true;
 			}
 			if (eventName == GlobalEventName.EndPhase && GetComponent<EntityData>().health <= 0) {
-				DestroyImmediate(gameObject);
+				Destroy(gameObject);
+				gameObject.SetActive(false);
 			}
 		}
 	}

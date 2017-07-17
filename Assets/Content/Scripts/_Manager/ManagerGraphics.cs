@@ -26,6 +26,9 @@ public class ManagerGraphics : MonoBehaviour {
 
 		// Iterate over each controller
 		for (int controllerIndex = 0; controllerIndex < 2; controllerIndex++) {
+			UnparentDisabledChildren(game.players[controllerIndex].hand);
+			UnparentDisabledChildren(game.players[controllerIndex].board);
+			UnparentDisabledChildren(game.players[controllerIndex].hero);
 			// Add all cards to hand
 			var hand = game.players[controllerIndex].hand.transform;
 
@@ -81,6 +84,14 @@ public class ManagerGraphics : MonoBehaviour {
 		var t = g.transform;
 		for (int i = t.childCount - 1; i >= 0; i--) {
 			DestroyImmediate(t.GetChild(i).gameObject);
+		}
+	}
+	void UnparentDisabledChildren(GameObject g) {
+		var t = g.transform;
+		for (int i = t.childCount - 1; i >= 0; i--) {
+			if (t.GetChild(i).gameObject.activeSelf == false) {
+				t.GetChild(i).parent = null;
+			}
 		}
 	}
 }

@@ -3,7 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//public enum Location {
+//	board,
+//	hand,
+//}
+public enum DragToTargetType {
+	minion,
+	spell,
+}
+
 public class TRIGGER_OnDragToTarget : MonoBehaviour, ITrigger, IOnInput {
+	public DragToTargetType type;
 	public bool canTargetHeroes = true;
 	public TargetType targetType = TargetType.Enemy;
 
@@ -13,9 +23,13 @@ public class TRIGGER_OnDragToTarget : MonoBehaviour, ITrigger, IOnInput {
 
 	public void OnInput(InputState state) {
 		var entity = GetComponent<EntityData>();
-		if (transform.parent.name == "board" && state.graphic != null &&
-		    GetComponent<EntityData>().isFriendly && entity.canAttack) {
-			
+		var isValid = state.graphic != null && GetComponent<EntityData>().isFriendly;
+		if (type == DragToTargetType.minion) {
+			isValid = isValid && transform.parent.name == "board" && entity.canAttack;
+		} else if (type == DragToTargetType.spell) {
+			isValid = isValid && transform.parent.name == "hand";
+		}
+		if (isValid) {
 			// Arrow
 			var spriteRenderer = ManagerGame.instance.arrow.GetComponent<SpriteRenderer>();
 			if(state.gesture.phase == GesturePhase.Begin) {
@@ -38,7 +52,11 @@ public class TRIGGER_OnDragToTarget : MonoBehaviour, ITrigger, IOnInput {
 			if (state.gesture.b != null && state.gesture.phase == GesturePhase.End) {
 				entity.Set("target", Core.GameObjectToPath(state.gesture.b.gameObject));
 				this.TriggerEvent();
+				//if (type == DragToTargetType.spell) {
+				//	DestroyImmediate(gameObject);
+				//}
 				state.manager.EndPhase();
+
 			}
 		}
 

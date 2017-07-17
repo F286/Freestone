@@ -29,7 +29,8 @@ public class Hero : MonoBehaviour, IOnGlobalEvent {
 		}
 		// Check if hero is dead
 		if (eventName == GlobalEventName.EndPhase && GetComponent<EntityData>().health <= 0) {
-			DestroyImmediate(gameObject);
+			Destroy(gameObject);
+			gameObject.SetActive(false);
 		}
 	}
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class ACTION_Destroy : MonoBehaviour, IAction {
 	public void OnEvent() {
-		DestroyImmediate(gameObject);
+		Destroy(gameObject);
+		gameObject.SetActive(false);
 	}
 }
