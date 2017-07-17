@@ -38,7 +38,8 @@ public class InputManager : MonoBehaviour {
 			case GestureType.Drag:
 			if (Input.GetMouseButtonDown(0)) {
 				phase = GesturePhase.Begin;
-				current = GetOverlap().GetComponent<Graphic>().source.GetComponent<EntityData>();
+				var overlap = GetOverlap();
+				current = overlap == null ? null : overlap.GetComponent<Graphic>().source.GetComponent<EntityData>();
 			} else if (Input.GetMouseButtonUp(0)) {
 				phase = GesturePhase.End;
 			} else if (Input.GetMouseButton(0)) {
