@@ -31,7 +31,15 @@ public class TRIGGER_OnDragToBoard : MonoBehaviour, ITrigger, IOnInput {
 
 				entity.Set("position", targetSiblingIndex.ToString());
 				this.TriggerEvent();
-				state.manager.EndPhase();
+
+				// Battlecry
+				var battlecry = GetComponent<TRIGGER_OnBattlecry>();
+				if (battlecry == null) {
+					state.manager.EndPhase();
+				} else {
+					state.gesture.setType(GestureType.Battlecry);
+					state.manager.EndPhase();
+				}
 			}
 		}
 	}
