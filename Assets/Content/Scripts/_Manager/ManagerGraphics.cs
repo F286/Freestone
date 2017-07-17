@@ -18,10 +18,10 @@ public class ManagerGraphics : MonoBehaviour {
 	public void updateGraphics(ManagerGame game) {
 		// Destroy previous graphics
 		for (int i = 0; i < 2; i++) {
-			DestoryAllChildren(game.players[i].graphicHand);
-			DestoryAllChildren(game.players[i].graphicBoard);
-			DestoryAllChildren(game.players[i].graphicDeck);
-			DestoryAllChildren(game.players[i].graphicHero);
+			DestroyAllChildren(game.players[i].graphicHand);
+			DestroyAllChildren(game.players[i].graphicBoard);
+			DestroyAllChildren(game.players[i].graphicDeck);
+			DestroyAllChildren(game.players[i].graphicHero);
 		}
 
 		// Iterate over each controller
@@ -80,7 +80,7 @@ public class ManagerGraphics : MonoBehaviour {
 
 	}
 
-	void DestoryAllChildren(GameObject g) {
+	void DestroyAllChildren(GameObject g) {
 		var t = g.transform;
 		for (int i = t.childCount - 1; i >= 0; i--) {
 			DestroyImmediate(t.GetChild(i).gameObject);

@@ -52,9 +52,6 @@ public class TRIGGER_OnDragToTarget : MonoBehaviour, ITrigger, IOnInput {
 			if (state.gesture.b != null && state.gesture.phase == GesturePhase.End) {
 				entity.Set("target", Core.GameObjectToPath(state.gesture.b.gameObject));
 				this.TriggerEvent();
-				//if (type == DragToTargetType.spell) {
-				//	DestroyImmediate(gameObject);
-				//}
 				state.manager.EndPhase();
 
 			}
