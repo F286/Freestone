@@ -55,12 +55,4 @@ public class TRIGGER_OnBattlecry : MonoBehaviour, ITrigger, IOnInput {
 		//}
 
 	}
-	public static string GameObjectToPath(GameObject gameObject) {
-		return gameObject.transform.parent.parent.name + "/" + 
-			   gameObject.transform.parent.name + "/" +
-			   gameObject.transform.name;
-	}
-	public static GameObject PathToGameObject(string path) {
-		return ManagerGame.instance.game.transform.Find(path).gameObject;
-	}
 }

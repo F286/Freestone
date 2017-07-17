@@ -25,6 +25,7 @@ public interface IOnTouch {
 }
 public class InputManager : MonoBehaviour {
 	public GameObject current;
+	//public GameObject current;
 	//public Transform battlecry;
 	public GestureType type;
 

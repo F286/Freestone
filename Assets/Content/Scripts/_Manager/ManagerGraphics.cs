@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class ManagerGraphics : MonoBehaviour {
 
+	public static ManagerGraphics instance;
+
 	public List<Graphic> graphics;
 	public List<Arc> boards;
 	public List<Arc> hands;
 	public List<Arc> heroes;
+
+	public void Awake() {
+		instance = this;
+	}
 
 	public void updateGraphics(ManagerGame game) {
 		// Destroy previous graphics

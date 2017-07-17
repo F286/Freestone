@@ -19,6 +19,7 @@ public interface IOnInput {
 
 public class ManagerGame : MonoBehaviour {
     public static ManagerGame instance;
+	public ManagerGraphics graphics;
 	public GameObject sequence;
 	public List<Player> players;
 	public GameObject game;
@@ -59,7 +60,7 @@ public class ManagerGame : MonoBehaviour {
     }
 	public void EndPhase() {
 		game.TriggerGlobalEvent(GlobalEventName.EndPhase);
-		GetComponent<ManagerGraphics>().updateGraphics(this);
+		graphics.updateGraphics(this);
 	}
     public void DragCard(GestureState state, Graphic graphic) {
 		graphic.source.SendMessage("OnInput", new InputState(this, state, graphic), 
