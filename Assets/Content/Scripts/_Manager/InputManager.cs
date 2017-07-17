@@ -14,8 +14,8 @@ public enum GesturePhase {
 }
 public struct GestureState {
     public GesturePhase phase;
-    public Graphic a;
-    public Graphic b;
+	public GameObject a;
+    public GameObject b;
 	public Vector2 worldPosition;
 	public GestureType type;
 	public System.Action<GestureType> setType;
@@ -24,7 +24,8 @@ public interface IOnTouch {
     void OnTouch(GestureState state);
 }
 public class InputManager : MonoBehaviour {
-	public EntityData current;
+	public GameObject dragBegin;
+	public EntityData entity;
 	public GestureType type;
 
     public void Awake() {
@@ -39,7 +40,14 @@ public class InputManager : MonoBehaviour {
 			if (Input.GetMouseButtonDown(0)) {
 				phase = GesturePhase.Begin;
 				var overlap = GetOverlap();
-				current = overlap == null ? null : overlap.GetComponent<Graphic>().source.GetComponent<EntityData>();
+				dragBegin = overlap;
+
+				var g = overlap == null ? null : overlap.GetComponent<Graphic>();
+				entity = g == null ? null : g.source.GetComponent<EntityData>();
+
+				if (overlap == null) {
+					phase = GesturePhase.None;
+				}
 			} else if (Input.GetMouseButtonUp(0)) {
 				phase = GesturePhase.End;
 			} else if (Input.GetMouseButton(0)) {
@@ -54,24 +62,23 @@ public class InputManager : MonoBehaviour {
 			}
 			break;
 		}
-		if (phase != GesturePhase.None && current != null) {
-			//print("start " + current);
-            var state = new GestureState();
-			state.phase = phase;
-			var path = Core.GameObjectToPath(current.gameObject);
-			var graphic = Core.PathToGraphic(path);
-			//print(path);
-			//print(graphic);
-			state.a = graphic;
-			var overlap = GetOverlap();
-			state.b = overlap == null ? null : overlap.GetComponent<Graphic>();
-			state.worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-			state.type = type;
-			state.setType = SetGestureType;
-			//print(current);
-			graphic.SendMessage("OnTouch", state, SendMessageOptions.DontRequireReceiver);
+		if (phase != GesturePhase.None) {
+			var graphic = dragBegin;
+			if (type == GestureType.Battlecry) {
+				graphic = Core.PathToGraphic(Core.GameObjectToPath(entity.gameObject)).gameObject;
+			}
+			if (graphic != null) { 
+				var state = new GestureState();
+				state.phase = phase;
 
-			//print(current);
+				state.a = graphic;
+				state.b = GetOverlap();
+				state.worldPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+				state.type = type;
+				state.setType = SetGestureType;
+				print(graphic);
+				graphic.SendMessage("OnTouch", state, SendMessageOptions.DontRequireReceiver);
+			}
 		}
 	}
 	void SetGestureType(GestureType gestureType) {
