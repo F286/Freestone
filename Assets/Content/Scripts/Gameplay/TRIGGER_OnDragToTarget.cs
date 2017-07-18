@@ -27,7 +27,7 @@ public class TRIGGER_OnDragToTarget : MonoBehaviour, ITrigger, IOnInput {
 		if (type == DragToTargetType.minion) {
 			isValid = isValid && transform.parent.name == "board" && entity.canAttack;
 		} else if (type == DragToTargetType.spell) {
-			isValid = isValid && transform.parent.name == "hand";
+			isValid = isValid && transform.parent.name == "hand" && entity.manaCost <= ManagerGame.instance.currentHero.mana;
 		}
 		if (isValid) {
 			// Arrow
