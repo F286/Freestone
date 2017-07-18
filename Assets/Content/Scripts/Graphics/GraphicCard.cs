@@ -13,6 +13,8 @@ public class GraphicCard : Graphic {
 	public GameObject attackCircle;
 	public GameObject healthCircle;
 
+    public SpriteRenderer art;
+
 	public override void UpdateGraphics(EntityData entity) {
 		manaCost.text = 	Format(entity.Get("mana_cost") 	);
 		attack.text = 		Format(entity.Get("attack") 	);
@@ -25,5 +27,8 @@ public class GraphicCard : Graphic {
 		health.gameObject.SetActive(showAttackHealth);
 		attackCircle.SetActive(showAttackHealth);
 		healthCircle.SetActive(showAttackHealth);
-	}
+
+        art.sprite = Resources.Load<Sprite>(entity.Get("art"));
+
+    }
 }
