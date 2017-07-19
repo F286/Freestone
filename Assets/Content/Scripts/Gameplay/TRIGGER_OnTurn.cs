@@ -10,7 +10,4 @@ public enum TurnState {
 public class TRIGGER_OnTurn : MonoBehaviour, ITrigger {
 	public TurnState turnState;
 
-	public void ExternalTrigger() {
-		this.TriggerEvent();
-	}
 }

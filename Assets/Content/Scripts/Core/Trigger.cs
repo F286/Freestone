@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public interface ITrigger : ITriggerAction {
-	void ExternalTrigger();
 }
 
 public static class TriggerExtensions {

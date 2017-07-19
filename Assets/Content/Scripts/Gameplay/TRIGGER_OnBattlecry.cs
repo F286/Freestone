@@ -12,10 +12,6 @@ public class TRIGGER_OnBattlecry : MonoBehaviour, ITrigger, IOnInput {
 	public bool canTargetHeroes = true;
 	public TargetType targetType = TargetType.Enemy;
 
-	public void ExternalTrigger() {
-		this.TriggerEvent();
-	}
-
 	public void OnInput(InputState state) {
 		var entity = GetComponent<EntityData>();
 		if(state.gesture.type == GestureType.Battlecry) {

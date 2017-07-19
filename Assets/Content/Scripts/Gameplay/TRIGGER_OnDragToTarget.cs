@@ -17,10 +17,6 @@ public class TRIGGER_OnDragToTarget : MonoBehaviour, ITrigger, IOnInput {
 	public bool canTargetHeroes = true;
 	public TargetType targetType = TargetType.Enemy;
 
-	public void ExternalTrigger() {
-		this.TriggerEvent();
-	}
-
 	public void OnInput(InputState state) {
 		var entity = GetComponent<EntityData>();
 		var isValid = state.graphic != null && GetComponent<EntityData>().isFriendly;

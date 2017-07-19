@@ -5,10 +5,6 @@ using UnityEngine;
 
 public class TRIGGER_OnDragToBoard : MonoBehaviour, ITrigger, IOnInput {
 
-	public void ExternalTrigger() {
-		this.TriggerEvent();
-	}
-
 	public void OnInput(InputState state) {
 		//print("drag to board");
 		var entity = GetComponent<EntityData>();

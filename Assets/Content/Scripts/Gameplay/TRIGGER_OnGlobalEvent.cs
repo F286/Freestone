@@ -8,6 +8,8 @@ public enum GlobalEventName {
 	BeginTurn,
 	EndTurn,
 	EndPhase,
+	OnPlay,
+	OnDeath,
 	GraphicsBattlecryStart,
 	GraphicsBattlecryEnd,
 }
@@ -27,13 +29,7 @@ public class TRIGGER_OnGlobalEvent : MonoBehaviour, ITrigger, IOnGlobalEvent {
 		}
 	}
 
-	public void ExternalTrigger() {
-		this.TriggerEvent();
-	}
-
 	public void OnGlobalEvent(GlobalEventName eventName) {
-		//print(eventName);
-		//print(this);
 		this.TriggerEvent();
 	}
 }

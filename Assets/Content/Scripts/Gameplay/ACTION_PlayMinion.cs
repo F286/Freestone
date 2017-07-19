@@ -16,5 +16,7 @@ public class ACTION_PlayMinion : MonoBehaviour, IAction {
 
 		// Subtract mana cost
 		ManagerGame.instance.currentHero.mana -= entity.manaCost;
+
+		entity.gameObject.TriggerGlobalEvent(GlobalEventName.OnPlay);
 	}
 }
