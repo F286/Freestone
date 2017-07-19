@@ -10,9 +10,9 @@ public class GraphicHero : GraphicMinion {
 	public override void UpdateGraphics(EntityData entity) {
 		base.UpdateGraphics(entity);
 
-		mana.text = Format(entity.Get("mana"));
+		mana.text = "<b>" + entity.mana.ToString() + "</b>";
 
-		var a = int.Parse(entity.Get("attack"));
+		var a = entity.attack;
 		attack.gameObject.SetActive(a > 0);
 		attackGraphic.gameObject.SetActive(a > 0);
 	}

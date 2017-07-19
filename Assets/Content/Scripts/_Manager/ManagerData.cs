@@ -15,6 +15,7 @@ public class ManagerData : MonoBehaviour {
 				return item.gameObject;
 			}
 		}
+		Debug.Log("Could not find entity with name: " + name);
 		return null;
 	}
 }

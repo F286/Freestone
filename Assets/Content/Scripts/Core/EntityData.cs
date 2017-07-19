@@ -45,7 +45,11 @@ public class EntityData : MonoBehaviour {
 	}
 	public int manaCost {
 		get {
-			return int.Parse(Get("mana_cost"));
+			int r = 0;
+			if (!int.TryParse(Get("mana_cost"), out r)) {
+				print("Could not parse 'mana_cost' for entity with name: " + name);
+			}
+			return r;
 		}
 		set {
 			Set("mana_cost", value.ToString());
@@ -53,7 +57,11 @@ public class EntityData : MonoBehaviour {
 	}
 	public int mana {
 		get {
-			return int.Parse(Get("mana"));
+			int r = 0;
+			if (!int.TryParse(Get("mana"), out r)) {
+				print("Could not parse 'mana' for entity with name: " + name);
+			}
+			return r;
 		}
 		set {
 			Set("mana", value.ToString());
@@ -61,7 +69,11 @@ public class EntityData : MonoBehaviour {
 	}
 	public int maxMana {
 		get {
-			return int.Parse(Get("max_mana"));
+			int r = 0;
+			if (!int.TryParse(Get("max_mana"), out r)) {
+				print("Could not parse 'max_mana' for entity with name: " + name);
+			}
+			return r;
 		}
 		set {
 			Set("max_mana", value.ToString());
@@ -69,7 +81,11 @@ public class EntityData : MonoBehaviour {
 	}
 	public int attack {
 		get {
-			return int.Parse(Get("attack"));
+			int r = 0;
+			if(!int.TryParse(Get("attack"), out r)) {
+				print("Could not parse 'attack' for entity with name: " + name);
+			}
+			return r;
 		}
 		set {
 			Set("attack", value.ToString());
@@ -77,7 +93,11 @@ public class EntityData : MonoBehaviour {
 	}
 	public int health {
 		get {
-			return int.Parse(Get("health"));
+			int r = 0;
+			if (!int.TryParse(Get("health"), out r)) {
+				print("Could not parse 'health' for entity with name: " + name);
+			}
+			return r;
 		}
 		set {
 			Set("health", value.ToString());
