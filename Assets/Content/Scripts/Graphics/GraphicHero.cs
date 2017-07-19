@@ -8,8 +8,8 @@ public class GraphicHero : GraphicMinion {
 	public TextMesh mana;
 
 	public override void UpdateGraphics(EntityData entity) {
-		attack.text = Format(entity.Get("attack"));
-		health.text = Format(entity.Get("health"));
+		base.UpdateGraphics(entity);
+
 		mana.text = Format(entity.Get("mana"));
 
 		var a = int.Parse(entity.Get("attack"));
