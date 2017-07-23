@@ -5,14 +5,13 @@ using UnityEngine;
 
 public class ACTION_CharacterAttack : MonoBehaviour, IAction {
 	public void OnEvent() {
-		var entity = GetComponent<EntityData>();
-		var targetPath = entity.Get("target");
-		var targetEntity = Core.PathToEntity(targetPath);
+		var self = GetComponent<EntityData>();
+		var target = Core.PathToEntity(self.Get("target"));
 
-		entity.health -= targetEntity.attack;
-		targetEntity.health -= entity.attack;
+		self.AddEnchantment<ENCHANT_ModifyHealth>().amount = -target.attack;
+		target.AddEnchantment<ENCHANT_ModifyHealth>().amount = -self.attack;
 
-		entity.canAttack = false;
+		self.canAttack = false;
 
 		ManagerGame.instance.EndPhase();
 	}

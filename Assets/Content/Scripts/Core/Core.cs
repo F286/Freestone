@@ -18,4 +18,11 @@ public static class Core {
 	//public static GameObject PathToGameObjectGraphics(string path) {
 	//	return ManagerGame.instance.graphics.transform.Find(path).gameObject;
 	//}
+
+	public static T AddEnchantment<T>(this EntityData data) where T : MonoBehaviour, IEnchantment {
+		var g = new GameObject(typeof(T).ToString());
+		g.transform.parent = data.transform;
+		var b = g.AddComponent<T>();
+		return b;
+	}
 }

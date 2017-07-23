@@ -6,11 +6,10 @@ using UnityEngine;
 public class ACTION_Damage : MonoBehaviour, IAction {
 	public int damage = 1;
 	public void OnEvent() {
-		var entity = GetComponent<EntityData>();
-		var targetPath = entity.Get("target");
-		var targetEntity = Core.PathToEntity(targetPath);
+		var self = GetComponent<EntityData>();
+		var target = Core.PathToEntity(self.Get("target"));
 
-		targetEntity.health -= damage;
+		target.AddEnchantment<ENCHANT_ModifyHealth>().amount = -damage;
 
 		ManagerGame.instance.EndPhase();
 	}

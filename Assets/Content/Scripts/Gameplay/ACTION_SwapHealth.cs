@@ -11,8 +11,9 @@ public class ACTION_SwapHealth : MonoBehaviour, IAction {
 
 		var s = self.health;
 		var t = target.health;
-		self.health = t;
-		target.health = s;
+
+		self.AddEnchantment<ENCHANT_SetHealth>().amount = t;
+		target.AddEnchantment<ENCHANT_SetHealth>().amount = s;
 
 		ManagerGame.instance.EndPhase();
 	}

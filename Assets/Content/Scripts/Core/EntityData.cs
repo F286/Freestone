@@ -22,7 +22,7 @@ public class EntityData : MonoBehaviour {
 	}
 	public void Set(string name, string setTo) {
 		for (int i = 0; i < attributes.Count; i++) {
-			if(attributes[i].type == name) {
+			if (attributes[i].type == name) {
 				attributes[i].data = setTo;
 				return;
 			}
@@ -32,7 +32,14 @@ public class EntityData : MonoBehaviour {
 		data.data = setTo;
 		attributes.Add(data);
 	}
-
+	public EnchantmentData EvaluateEnchantments() {
+		var data = new EnchantmentData(getAttack(), getHealth());
+		var enchantments = GetComponentsInChildren<IEnchantment>();
+		foreach (var item in enchantments) {
+			data = item.Evaluate(data);
+		}
+		return data;
+	}
 	public bool isFriendly {
 		get {
 			return GetComponentInParent<Player>().number == ManagerGame.instance.currentPlayerIndex;
@@ -79,28 +86,30 @@ public class EntityData : MonoBehaviour {
 			Set("max_mana", value.ToString());
 		}
 	}
+	public int getAttack() {
+		int r = 0;
+		if (!int.TryParse(Get("attack"), out r)) {
+			print("Could not parse 'attack' for entity with name: " + name);
+		}
+		return r;
+	}
+	public int getHealth() {
+		int r = 0;
+		if (!int.TryParse(Get("health"), out r)) {
+			print("Could not parse 'health' for entity with name: " + name);
+		}
+		return r;
+	}
 	public int attack {
 		get {
-			int r = 0;
-			if(!int.TryParse(Get("attack"), out r)) {
-				print("Could not parse 'attack' for entity with name: " + name);
-			}
-			return r;
-		}
-		set {
-			Set("attack", value.ToString());
+			var data = EvaluateEnchantments();
+			return data.attack;
 		}
 	}
 	public int health {
 		get {
-			int r = 0;
-			if (!int.TryParse(Get("health"), out r)) {
-				print("Could not parse 'health' for entity with name: " + name);
-			}
-			return r;
-		}
-		set {
-			Set("health", value.ToString());
+			var data = EvaluateEnchantments();
+			return data.health;
 		}
 	}
 	public bool canAttack {
