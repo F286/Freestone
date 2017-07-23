@@ -44,7 +44,6 @@ public class TRIGGER_OnDragToTarget : MonoBehaviour, ITrigger, IOnInput {
 			spriteRenderer.size = new Vector2(diff.magnitude / spriteRenderer.transform.localScale.y, 
 			                                  spriteRenderer.size.y);
 			
-
 			if (state.gesture.b != null && state.gesture.phase == GesturePhase.End) {
 				entity.targetGraphic = state.gesture.b;
 				this.TriggerEvent();

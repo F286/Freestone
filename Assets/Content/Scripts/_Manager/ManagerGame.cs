@@ -55,6 +55,8 @@ public class ManagerGame : MonoBehaviour {
 	}
 	public void Start() {
 		EndPhase();
+		game.TriggerGlobalEvent(GlobalEventName.BeginGame);
+		EndPhase();
 		BeginTurn();
 		EndPhase();
 	}

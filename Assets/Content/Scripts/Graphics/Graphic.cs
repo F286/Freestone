@@ -17,8 +17,8 @@ public abstract class Graphic : MonoBehaviour, IOnTouch {
 		ManagerGame.instance.DragCard(state, this);
     }
 	public virtual void UpdateGraphics(EntityData entity) {
-		attack.text = Format(entity.attack.ToString());
-		health.text = Format(entity.health.ToString());
+		attack.text = Core.Format(entity.attack.ToString());
+		health.text = Core.Format(entity.health.ToString());
 
 		art.sprite = Resources.Load<Sprite>(entity.Get("art"));
 
@@ -28,9 +28,5 @@ public abstract class Graphic : MonoBehaviour, IOnTouch {
 		//print(scale);
 		var s = Mathf.Max(scale.x, scale.y);
 		art.transform.localScale = new Vector3(s, s, 1);
-	}
-
-	public static string Format(string text) {
-		return "<b>" + text.Replace('/', '\n') + "</b>";
 	}
 }

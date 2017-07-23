@@ -10,8 +10,22 @@ public class Hero : MonoBehaviour, IOnGlobalEvent {
 		}
 	}
 
+	void DrawCard() {
+		var player = GetComponentInParent<Player>();
+		// Draw card
+		if (player.deck.transform.childCount > 0) {
+			var randomChild = UnityEngine.Random.Range(0, player.deck.transform.childCount - 1);
+			player.deck.transform.GetChild(randomChild).SetParent(player.hand.transform);
+		}
+	}
+
 	public void OnGlobalEvent(GlobalEventName eventName) {
 		var player = GetComponentInParent<Player>();
+		if (eventName == GlobalEventName.BeginGame) {
+			for (int i = 0; i < 2; i++) {
+				DrawCard();
+			}
+		}
 		// Start of Turn
 		if (eventName == GlobalEventName.BeginTurn && 
 		    player.number == ManagerGame.instance.currentPlayerIndex) {
@@ -22,10 +36,7 @@ public class Hero : MonoBehaviour, IOnGlobalEvent {
 			entity.maxMana = Math.Min(entity.maxMana + 1, 10);
 			entity.mana = entity.maxMana;
 
-			// Draw card
-			if (player.deck.transform.childCount > 0) {
-				player.deck.transform.GetChild(0).SetParent(player.hand.transform);
-			}
+			DrawCard();
 		}
 		// Check if hero is dead
 		if (eventName == GlobalEventName.EndPhase && GetComponent<EntityData>().health <= 0) {

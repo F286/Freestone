@@ -12,7 +12,7 @@ public enum SpawnLocation {
 }
 public class ACTION_Spawn : MonoBehaviour, IAction {
 	public string minionName;
-	public SpawnLocation location;
+	public SpawnLocation location = SpawnLocation.Right;
 	public static int index;
 	public void OnEvent() {
 		Transform t = null;

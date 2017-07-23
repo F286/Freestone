@@ -25,4 +25,8 @@ public static class Core {
 		var b = g.AddComponent<T>();
 		return b;
 	}
+
+	public static string Format(string text) {
+		return "<b>" + text.Replace('%', '\n') + "</b>";
+	}
 }

@@ -14,9 +14,9 @@ public class GraphicCard : Graphic {
 	public override void UpdateGraphics(EntityData entity) {
 		base.UpdateGraphics(entity);
 
-		manaCost.text = 	Format(entity.Get("mana_cost") 	);
-		title.text = 		Format(entity.Get("title") 		);
-		description.text = 	Format(entity.Get("description"));
+		manaCost.text = 	Core.Format(entity.Get("mana_cost") 	);
+		title.text = 		Core.Format(entity.Get("title") 		);
+		description.text = 	Core.Format(entity.Get("description"));
 
 		var showAttackHealth = entity.attack != 0 || entity.health != 0;
 		attack.gameObject.SetActive(showAttackHealth);

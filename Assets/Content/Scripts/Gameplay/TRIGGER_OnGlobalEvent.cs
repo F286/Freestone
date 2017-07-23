@@ -10,6 +10,8 @@ public enum GlobalEventName {
 	EndPhase,
 	OnPlay,
 	OnDeath,
+	OnDamage,
+	BeginGame,
 	GraphicsBattlecryStart,
 	GraphicsBattlecryEnd,
 }
