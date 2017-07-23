@@ -50,6 +50,19 @@ public class EntityData : MonoBehaviour {
 			return GetComponentInParent<Player>();
 		}
 	}
+	public EntityData target {
+		get {
+			return Core.PathToEntity(Get("target"));
+		}
+		set {
+			Set("target", Core.GameObjectToPath(value.gameObject));
+		}
+	}
+	public GameObject targetGraphic {
+		set {
+			Set("target", Core.GameObjectToPath(value));
+		}
+	}
 	public int manaCost {
 		get {
 			int r = 0;

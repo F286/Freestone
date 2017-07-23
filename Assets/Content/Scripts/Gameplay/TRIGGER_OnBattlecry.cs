@@ -3,14 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum TargetType {
+public enum PlayerType {
 	Any,
 	Friendly,
 	Enemy,
 }
 public class TRIGGER_OnBattlecry : MonoBehaviour, ITrigger, IOnInput {
 	public bool canTargetHeroes = true;
-	public TargetType targetType = TargetType.Enemy;
+	public PlayerType targetType = PlayerType.Enemy;
 
 	public void OnInput(InputState state) {
 		var entity = GetComponent<EntityData>();

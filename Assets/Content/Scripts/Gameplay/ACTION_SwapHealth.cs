@@ -7,7 +7,7 @@ public class ACTION_SwapHealth : MonoBehaviour, IAction {
 	public int damage = 1;
 	public void OnEvent() {
 		var self = GetComponent<EntityData>();
-		var target = Core.PathToEntity(self.Get("target"));
+		var target = self.target;
 
 		var s = self.health;
 		var t = target.health;

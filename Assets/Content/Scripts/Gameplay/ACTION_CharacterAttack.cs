@@ -6,7 +6,7 @@ using UnityEngine;
 public class ACTION_CharacterAttack : MonoBehaviour, IAction {
 	public void OnEvent() {
 		var self = GetComponent<EntityData>();
-		var target = Core.PathToEntity(self.Get("target"));
+		var target = self.target;
 
 		self.AddEnchantment<ENCHANT_ModifyHealth>().amount = -target.attack;
 		target.AddEnchantment<ENCHANT_ModifyHealth>().amount = -self.attack;

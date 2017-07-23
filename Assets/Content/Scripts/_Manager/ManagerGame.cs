@@ -41,7 +41,18 @@ public class ManagerGame : MonoBehaviour {
     public void Awake() {
         instance = this;
 		arrow.gameObject.SetActive(false);
-    }
+
+		for (int i = 0; i < 2; i++) {
+			foreach (var item in ManagerData.instance.GetComponentsInChildren<Minion>()) {
+				Instantiate(item, players[0].deck.transform);
+				Instantiate(item, players[1].deck.transform);
+			}
+		}
+		foreach (var item in ManagerData.instance.GetComponentsInChildren<Spell>()) {
+			Instantiate(item, players[0].deck.transform);
+			Instantiate(item, players[1].deck.transform);
+		}
+	}
 	public void Start() {
 		EndPhase();
 		BeginTurn();

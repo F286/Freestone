@@ -8,6 +8,7 @@ public enum TurnState {
 	End,
 }
 public class TRIGGER_OnTurn : MonoBehaviour, ITrigger {
+	public PlayerType player = PlayerType.Friendly;
 	public TurnState turnState;
 
 }

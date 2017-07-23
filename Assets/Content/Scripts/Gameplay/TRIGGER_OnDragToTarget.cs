@@ -15,7 +15,7 @@ public enum DragToTargetType {
 public class TRIGGER_OnDragToTarget : MonoBehaviour, ITrigger, IOnInput {
 	public DragToTargetType type;
 	public bool canTargetHeroes = true;
-	public TargetType targetType = TargetType.Enemy;
+	public PlayerType targetType = PlayerType.Enemy;
 
 	public void OnInput(InputState state) {
 		var entity = GetComponent<EntityData>();
@@ -46,7 +46,7 @@ public class TRIGGER_OnDragToTarget : MonoBehaviour, ITrigger, IOnInput {
 			
 
 			if (state.gesture.b != null && state.gesture.phase == GesturePhase.End) {
-				entity.Set("target", Core.GameObjectToPath(state.gesture.b.gameObject));
+				entity.targetGraphic = state.gesture.b;
 				this.TriggerEvent();
 				state.manager.EndPhase();
 
