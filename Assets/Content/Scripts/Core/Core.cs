@@ -1,8 +1,27 @@
-﻿using System.Collections;
+﻿﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum CardLocation {
+	Board,
+	Hand,
+	Deck,
+}
+
 public static class Core {
+
+	public static CardLocation GetLocation(this Component component) {
+		if (component.transform.parent.name == "board") {
+			return CardLocation.Board;
+		}
+		else if (component.transform.parent.name == "hand") {
+			return CardLocation.Hand;
+		}
+		return CardLocation.Deck;
+	}
+	public static Player GetPlayer(this Component component) {
+		return component.GetComponentInParent<Player>();
+	}
 
 	public static string GameObjectToPath(GameObject gameObject) {
 		return gameObject.transform.parent.parent.name + "/" +

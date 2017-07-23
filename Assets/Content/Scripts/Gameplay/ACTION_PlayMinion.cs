@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ACTION_PlayMinion : MonoBehaviour, IAction {
 	public void OnEvent() {
-		var player = GetComponentInParent<Player>();
+		var player = this.GetPlayer();
 
 		var entity = GetComponent<EntityData>();
 		var targetSiblingIndex = int.Parse(entity.Get("position"));

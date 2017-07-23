@@ -11,7 +11,7 @@ public class Spell : MonoBehaviour, IOnGlobalEvent {
 	}
 
 	public void OnGlobalEvent(GlobalEventName eventName) {
-		var player = GetComponentInParent<Player>();
+		var player = this.GetPlayer();
 
 	}
 }

@@ -23,7 +23,7 @@ public class Minion : MonoBehaviour, IOnGlobalEvent {
 	public void OnGlobalEvent(GlobalEventName eventName) {
 		if (transform.parent.name == "board") {
 			if (eventName == GlobalEventName.BeginTurn &&
-			   GetComponentInParent<Player>().number == ManagerGame.instance.currentPlayerIndex) {
+			   this.GetPlayer().number == ManagerGame.instance.currentPlayerIndex) {
 
 				GetComponent<EntityData>().canAttack = true;
 			}

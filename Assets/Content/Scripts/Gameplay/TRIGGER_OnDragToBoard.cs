@@ -15,7 +15,7 @@ public class TRIGGER_OnDragToBoard : MonoBehaviour, ITrigger, IOnInput {
 			state.graphic.transform.position = state.gesture.worldPosition;
 
 			if (state.gesture.phase == GesturePhase.End) {
-				var player = GetComponentInParent<Player>();
+				var player = this.GetPlayer();
 
 				// Calculate target sibling index
 				int targetSiblingIndex = 0;

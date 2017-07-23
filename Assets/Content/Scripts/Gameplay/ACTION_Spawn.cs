@@ -24,13 +24,13 @@ public class ACTION_Spawn : MonoBehaviour, IAction {
 			t = transform.parent;
 			break;
 			case SpawnLocation.Board:
-			t = GetComponentInParent<Player>().board.transform;
+			t = this.GetPlayer().board.transform;
 			break;
 			case SpawnLocation.Hand:
-			t = GetComponentInParent<Player>().hand.transform;
+			t = this.GetPlayer().hand.transform;
 			break;
 			case SpawnLocation.Deck:
-			t = GetComponentInParent<Player>().deck.transform;
+			t = this.GetPlayer().deck.transform;
 			break;
 		}
 		var n = minionName == "" ? name : minionName;

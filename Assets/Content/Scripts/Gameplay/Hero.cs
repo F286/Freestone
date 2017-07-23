@@ -11,7 +11,7 @@ public class Hero : MonoBehaviour, IOnGlobalEvent {
 	}
 
 	void DrawCard() {
-		var player = GetComponentInParent<Player>();
+		var player = this.GetPlayer();
 		// Draw card
 		if (player.deck.transform.childCount > 0) {
 			var randomChild = UnityEngine.Random.Range(0, player.deck.transform.childCount - 1);
@@ -20,7 +20,7 @@ public class Hero : MonoBehaviour, IOnGlobalEvent {
 	}
 
 	public void OnGlobalEvent(GlobalEventName eventName) {
-		var player = GetComponentInParent<Player>();
+		var player = this.GetPlayer();
 		if (eventName == GlobalEventName.BeginGame) {
 			for (int i = 0; i < 2; i++) {
 				DrawCard();

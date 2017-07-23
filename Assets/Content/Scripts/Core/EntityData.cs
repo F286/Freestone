@@ -42,12 +42,12 @@ public class EntityData : MonoBehaviour {
 	}
 	public bool isFriendly {
 		get {
-			return GetComponentInParent<Player>().number == ManagerGame.instance.currentPlayerIndex;
+			return this.GetPlayer().number == ManagerGame.instance.currentPlayerIndex;
 		}
 	}
 	public Player player {
 		get {
-			return GetComponentInParent<Player>();
+			return this.GetPlayer();
 		}
 	}
 	public EntityData target {
