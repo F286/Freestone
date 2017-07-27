@@ -36,8 +36,7 @@ public class ManagerGraphics : MonoBehaviour {
 				var item = hand.GetChild(i);
 				var t = 0.5f;
 				if (hand.childCount > 1) {
-					t += i * (1f / 6f);
-					t -= ((hand.childCount - 1f) / 6f) / 2f;
+					t = i / (float)(hand.childCount - 1);
 				}
 				var position = hands[controllerIndex].evaluate(t);
 				var tr = game.players[controllerIndex].graphicHand.transform;

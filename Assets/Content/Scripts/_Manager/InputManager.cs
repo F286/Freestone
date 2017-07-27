@@ -95,7 +95,7 @@ public class InputManager : MonoBehaviour {
 		}
 	}
     GameObject GetOverlap() {
-        var o = Physics2D.OverlapCircle(Camera.main.ScreenToWorldPoint(Input.mousePosition), 0.3f);
+        var o = Physics2D.OverlapCircle(Camera.main.ScreenToWorldPoint(Input.mousePosition), 0.03f);
         if(o != null) {
             return o.gameObject;
         }
