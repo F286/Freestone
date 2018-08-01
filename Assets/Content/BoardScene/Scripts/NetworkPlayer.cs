@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
+using UnityEngine.Events;
 
 public class NetworkPlayer : NetworkBehaviour
 {
@@ -21,7 +22,7 @@ public class NetworkPlayer : NetworkBehaviour
 	// Use this for initialization
 	void Start()
 	{
-		controller.OnPlayerInput += OnPlayerInput;
+		controller.onInput.AddListener(OnInput);
 	}
 
 	// Update is called once per frame
@@ -111,22 +112,29 @@ public class NetworkPlayer : NetworkBehaviour
 	{
 		Debug.Log ("score:"+score);
 	}
+	// public void TakeAction(PlayerAction action, string from, string to) {
+	// 	print(action + "   " + from + "   " + to);
+	// }
 
-	void OnPlayerInput(PlayerAction action, int amount)
+	void OnInput(PlayerAction action, string from, string to)
 	{
-		if (action == PlayerAction.SHOOT)
-		{
-			CmdOnPlayerInput(action, amount);
-		}
+		// if (action == PlayerAction.SHOOT)
+		// {
+			CmdOnInput(action, from, to);
+		// }
 	}
 
 	[Command]
-	void CmdOnPlayerInput(PlayerAction action, int amount)
+	void CmdOnInput(PlayerAction action, string from, string to)
 	{
+		controller.ExecuteEvent(action, from, to);
+
+		// players [ActivePlayer].TakeAction (action, from, to);
+
 		//Shoot bullets
 
 		//Update score
-		NetworkManager.Instance.UpdateScore(amount);
+		// NetworkManager.Instance.UpdateScore(amount);
 	}
 
 	public void UpdateTimeDisplay(float curtime)
@@ -135,4 +143,8 @@ public class NetworkPlayer : NetworkBehaviour
 		Text timer = timerText.GetComponent<Text> ();
 		timer.text = Mathf.Round(curtime).ToString();
 	}
+}
+
+[System.Serializable]
+public class PlayerEvent : UnityEvent<PlayerAction, string, string> {
 }
