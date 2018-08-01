@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
 {
 	// public delegate void PlayerInputCallback(PlayerAction action, string from, string to);
 	// public event PlayerInputCallback OnPlayerInput;
-	public PlayerEvent onInput;
+	public PlayerEvent onIntent;
 	bool isLocalPlayer = false;
 
 	// public static PlayerController instance;
@@ -25,20 +25,20 @@ public class PlayerController : MonoBehaviour
 	// }
 
 	public void OnEnable() {
-		CardManager.instance.onInput.AddListener(InputEvent);
+		CardManager.instance.onIntent.AddListener(Intent);
 	}
 	public void OnDisable() {
-		CardManager.instance.onInput.RemoveListener(InputEvent);
+		CardManager.instance.onIntent.RemoveListener(Intent);
 	}
-	void InputEvent(PlayerAction action, string from, string to) {
+	void Intent(PlayerAction action, string from, string to) {
 		// print("input " + from);
-		onInput.Invoke(action, from, to);
+		onIntent.Invoke(action, from, to);
 		// Debug.Log(this, this);
 	}
 
-	public void ExecuteEvent(PlayerAction action, string from, string to) {
+	public void Execute(PlayerAction action, string from, string to) {
 		// print("execute " + from);
-		CardManager.instance.ExecuteEvent(action, from, to);
+		CardManager.instance.Execute(action, from, to);
 	}
 
 	// Update is called once per frame

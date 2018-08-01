@@ -5,23 +5,23 @@ using UnityEngine;
 public class CardManager : MonoBehaviour {
 
 	public Transform areas;
-	public PlayerEvent onInput;
+	public PlayerEvent onIntent;
 
 	Dictionary<string, CardGesture> cards = new Dictionary<string, CardGesture>();
 
 	public void AddCard(CardGesture card) {
-		card.onInput.AddListener(OnInput);
+		card.onInput.AddListener(Intent);
 		cards.Add(card.name, card);
 	}
 	public void RemoveCard(CardGesture card) {
-		card.onInput.RemoveListener(OnInput);
+		card.onInput.RemoveListener(Intent);
 		cards.Remove(card.name);
 	}
-	void OnInput(PlayerAction action, string from, string to) {
-		onInput.Invoke(action, from, to);
+	void Intent(PlayerAction action, string from, string to) {
+		onIntent.Invoke(action, from, to);
 	}
 
-	public void ExecuteEvent(PlayerAction action, string from, string to) {
+	public void Execute(PlayerAction action, string from, string to) {
 		cards[from].ExecuteEvent(action, from, to);
 	}
 

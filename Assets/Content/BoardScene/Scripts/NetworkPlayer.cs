@@ -22,7 +22,7 @@ public class NetworkPlayer : NetworkBehaviour
 	// Use this for initialization
 	void Start()
 	{
-		controller.onInput.AddListener(OnInput);
+		controller.onIntent.AddListener(Intent);
 	}
 
 	// Update is called once per frame
@@ -116,25 +116,21 @@ public class NetworkPlayer : NetworkBehaviour
 	// 	print(action + "   " + from + "   " + to);
 	// }
 
-	void OnInput(PlayerAction action, string from, string to)
-	{
-		// if (action == PlayerAction.SHOOT)
-		// {
-			CmdOnInput(action, from, to);
-		// }
+	void Intent(PlayerAction action, string from, string to) {
+		NetworkManager.Instance.Intent(action, from, to);
 	}
 
+	// [Command]
+	// void CmdOnInput(PlayerAction action, string from, string to) {
+	// 	controller.ExecuteEvent(action, from, to);
+	// }
+
+	public void Execute(PlayerAction action, string from, string to) {
+		CmdOnExecute(action, from, to);
+	}
 	[Command]
-	void CmdOnInput(PlayerAction action, string from, string to)
-	{
-		controller.ExecuteEvent(action, from, to);
-
-		// players [ActivePlayer].TakeAction (action, from, to);
-
-		//Shoot bullets
-
-		//Update score
-		// NetworkManager.Instance.UpdateScore(amount);
+	void CmdOnExecute(PlayerAction action, string from, string to) {
+		controller.Execute(action, from, to);
 	}
 
 	public void UpdateTimeDisplay(float curtime)
