@@ -10,19 +10,9 @@ public enum PlayerAction
 	// JUMP
 }
 
-public class PlayerController : MonoBehaviour
-{
-	// public delegate void PlayerInputCallback(PlayerAction action, string from, string to);
-	// public event PlayerInputCallback OnPlayerInput;
+public class PlayerController : MonoBehaviour {
 	public PlayerEvent onIntent;
 	bool isLocalPlayer = false;
-
-	// public static PlayerController instance;
-
-	// Use this for initialization
-	// void Start()
-	// {
-	// }
 
 	public void OnEnable() {
 		CardManager.instance.onIntent.AddListener(Intent);
@@ -31,13 +21,10 @@ public class PlayerController : MonoBehaviour
 		CardManager.instance.onIntent.RemoveListener(Intent);
 	}
 	void Intent(PlayerAction action, string from, string to) {
-		// print("input " + from);
 		onIntent.Invoke(action, from, to);
-		// Debug.Log(this, this);
 	}
 
 	public void Execute(PlayerAction action, string from, string to) {
-		// print("execute " + from);
 		CardManager.instance.Execute(action, from, to);
 	}
 

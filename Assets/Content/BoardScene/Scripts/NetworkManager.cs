@@ -85,12 +85,17 @@ public class NetworkManager : UnityEngine.Networking.NetworkManager
 	{
 		players [ActivePlayer].UpdateScore (score);
 	}
-	public void Intent(PlayerAction action, string from, string to) {
-		foreach (var item in players) {
-			item.Execute(action, from, to);
-		}
-		// players [ActivePlayer].CmdOnInput (action, from, to);
-	}
+
+	// public void Intent(PlayerAction action, string from, string to) {
+	// 	Intent(action, from, to);
+	// }
+	// [Command]
+	// void CmdIntent(PlayerAction action, string from, string to) {
+	// 	// foreach (var item in players) {
+	// 	// 	item.Execute(action, from, to);
+	// 	// }
+	// 	players[ActivePlayer].Execute(action, from, to);
+	// }
 
 	public void RegisterNetworkPlayer(NetworkPlayer player)
 	{

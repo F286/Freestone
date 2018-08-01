@@ -117,19 +117,23 @@ public class NetworkPlayer : NetworkBehaviour
 	// }
 
 	void Intent(PlayerAction action, string from, string to) {
-		NetworkManager.Instance.Intent(action, from, to);
+		// NetworkManager.Instance.Intent(action, from, to);
+
+		// Execute(action, from, to);
+		CmdOnInput(action, from, to);
 	}
 
-	// [Command]
-	// void CmdOnInput(PlayerAction action, string from, string to) {
-	// 	controller.ExecuteEvent(action, from, to);
-	// }
+	[Command]
+	void CmdOnInput(PlayerAction action, string from, string to) {
+		// controller.ExecuteEvent(action, from, to);
+		Execute(action, from, to);
+	}
 
 	public void Execute(PlayerAction action, string from, string to) {
-		CmdOnExecute(action, from, to);
+		RpcOnExecute(action, from, to);
 	}
-	[Command]
-	void CmdOnExecute(PlayerAction action, string from, string to) {
+	[ClientRpc]
+	void RpcOnExecute(PlayerAction action, string from, string to) {
 		controller.Execute(action, from, to);
 	}
 
