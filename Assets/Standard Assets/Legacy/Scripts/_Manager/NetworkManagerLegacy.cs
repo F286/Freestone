@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class NetworkManager : NetworkBehaviour {
+public class NetworkManagerLegacy : NetworkBehaviour {
 	public void Update () {
 		if(Input.GetKeyDown(KeyCode.Space)) {
 			CmdSpawn();
