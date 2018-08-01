@@ -6,6 +6,9 @@ public class CardGesture : MonoBehaviour {
 
 	public PlayerEvent onInput;
 
+	[Space]
+	public CardManager cardManager;
+
 	public void Start () {
 
 		this.UpdateDrag(data => {
@@ -13,17 +16,21 @@ public class CardGesture : MonoBehaviour {
 			transform.position = data.position;
 		});
 		this.EndDrag(data => {
-			onInput.Invoke(PlayerAction.Drag, transform.name, "other");
+			onInput.Invoke(PlayerAction.Drag, name, "Board (1)");
 		});
+	}
+	public void ExecuteEvent(PlayerAction action, string from, string to) {
+		// print("execute " + from);
+		print(to);
+		transform.parent = cardManager.FindArea(to);
 	}
 
 	public void OnEnable() {
-		GetComponentInParent<CardManager>().AddCard(this);
+		cardManager.AddCard(this);
 	}
 	public void OnDisable() {
-		var parent = GetComponentInParent<CardManager>();
-		if (parent) {
-			parent.RemoveCard(this);
+		if (cardManager) {
+			cardManager.RemoveCard(this);
 		}
 	}
 }

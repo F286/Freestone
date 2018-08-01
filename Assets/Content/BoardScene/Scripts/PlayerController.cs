@@ -31,13 +31,13 @@ public class PlayerController : MonoBehaviour
 		CardManager.instance.onInput.RemoveListener(InputEvent);
 	}
 	void InputEvent(PlayerAction action, string from, string to) {
-		print("input " + from);
+		// print("input " + from);
 		onInput.Invoke(action, from, to);
 		// Debug.Log(this, this);
 	}
 
 	public void ExecuteEvent(PlayerAction action, string from, string to) {
-		print("execute " + from);
+		// print("execute " + from);
 		CardManager.instance.ExecuteEvent(action, from, to);
 	}
 
