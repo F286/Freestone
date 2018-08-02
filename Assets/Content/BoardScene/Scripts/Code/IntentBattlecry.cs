@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DragToBoard : MonoBehaviour {
+public class IntentBattlecry : MonoBehaviour {
 
-	public CardEvent onDragToBoard;
+	public CardEvent onSelectTarget;
 
 }
