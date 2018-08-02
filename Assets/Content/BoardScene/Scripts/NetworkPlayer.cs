@@ -112,20 +112,13 @@ public class NetworkPlayer : NetworkBehaviour
 	{
 		Debug.Log ("score:"+score);
 	}
-	// public void TakeAction(PlayerAction action, string from, string to) {
-	// 	print(action + "   " + from + "   " + to);
-	// }
 
 	void Intent(PlayerAction action, string from, string to) {
-		// NetworkManager.Instance.Intent(action, from, to);
-
-		// Execute(action, from, to);
 		CmdOnInput(action, from, to);
 	}
 
 	[Command]
 	void CmdOnInput(PlayerAction action, string from, string to) {
-		// controller.ExecuteEvent(action, from, to);
 		Execute(action, from, to);
 	}
 
