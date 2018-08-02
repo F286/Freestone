@@ -16,7 +16,7 @@ public class CardGesture : MonoBehaviour {
 			transform.position = data.position;
 		});
 		this.EndDrag(data => {
-			print(data.hovered.Count);
+			// print(data.hovered.Count);
 			foreach (var item in data.hovered) {
 				if (item.GetComponent<CardTarget>()) {
 					onInput.Invoke(PlayerAction.Drag, name, item.name);
