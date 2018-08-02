@@ -3,32 +3,42 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CardGesture : MonoBehaviour {
-
 	public PlayerEvent onInput;
-
 	[Space]
 	public CardManager cardManager;
 
-	public void Start () {
-
+	public void OnEnable() {
+		// Drag
+		this.BeginDrag(data => {
+		});
 		this.UpdateDrag(data => {
 
 			transform.position = data.position;
 		});
 		this.EndDrag(data => {
-			onInput.Invoke(PlayerAction.Drag, name, "Board (1)");
+			print(data.hovered.Count);
+			foreach (var item in data.hovered) {
+				if (item.GetComponent<CardTarget>()) {
+					onInput.Invoke(PlayerAction.Drag, name, item.name);
+					break;
+				}
+
+			}
 		});
+
+		// Card Manager
+		cardManager.AddCard(this);
 	}
 	public void ExecuteEvent(PlayerAction action, string from, string to) {
 		// print("execute " + from);
 		print(to);
 		transform.parent = cardManager.FindArea(to);
 	}
-
-	public void OnEnable() {
-		cardManager.AddCard(this);
-	}
 	public void OnDisable() {
+		// Drag
+		this.ClearDrag();
+
+		// Card Manager
 		if (cardManager) {
 			cardManager.RemoveCard(this);
 		}

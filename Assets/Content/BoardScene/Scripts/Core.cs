@@ -34,6 +34,11 @@ public static class Core {
 	public static void EndDrag(this MonoBehaviour behaviour, UnityAction<PointerEventData> action) {
 		behaviour.GetOrAddComponent<GestureInteract>().onEnd.AddListener(action);
 	}
+	public static void ClearDrag(this MonoBehaviour behaviour) {
+		behaviour.GetOrAddComponent<GestureInteract>().onBegin.RemoveAllListeners();
+		behaviour.GetOrAddComponent<GestureInteract>().onUpdate.RemoveAllListeners();
+		behaviour.GetOrAddComponent<GestureInteract>().onEnd.RemoveAllListeners();
+	}
 
 	public static float Dampen(float source, float target, float smoothing) {
 		return Mathf.Lerp(source, target, 1 - Mathf.Exp(-smoothing * Time.deltaTime));

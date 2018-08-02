@@ -20,6 +20,7 @@ public class GestureInteract : MonoBehaviour, IInitializePotentialDragHandler, I
 		eventData.useDragThreshold = false;
 
 		this.GetOrAddComponent<CanvasGroup>().interactable = false;
+		this.GetOrAddComponent<CanvasGroup>().blocksRaycasts = false;
   }
   public void OnPointerDown(PointerEventData eventData) {
 		onBegin.Invoke(eventData);
@@ -36,6 +37,7 @@ public class GestureInteract : MonoBehaviour, IInitializePotentialDragHandler, I
 		onEnd.Invoke(cacheEventData);
 		
 		this.GetOrAddComponent<CanvasGroup>().interactable = true;
+		this.GetOrAddComponent<CanvasGroup>().blocksRaycasts = true;
   }
 
 	public void Update() {
