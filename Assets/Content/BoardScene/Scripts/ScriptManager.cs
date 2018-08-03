@@ -25,7 +25,7 @@ public class ScriptManager : MonoBehaviour {
 			return squares";
 
 		DynValue res = Script.RunString(script);
-		print(res.String);
+		print(res.Callback);
 		// return res.Number;
 	}
 

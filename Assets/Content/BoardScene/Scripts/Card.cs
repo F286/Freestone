@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CardGesture : MonoBehaviour {
+public class Card : MonoBehaviour {
 	public PlayerEvent onInput;
 	[Space]
 	public CardManager cardManager;
@@ -19,7 +19,7 @@ public class CardGesture : MonoBehaviour {
 			// print(data.hovered.Count);
 			foreach (var item in data.hovered) {
 				if (item.GetComponent<CardTarget>()) {
-					onInput.Invoke(PlayerAction.Drag, name, item.name);
+					onInput.Invoke(IntentType.DragToBoard, name, item.name);
 					break;
 				}
 
@@ -29,7 +29,7 @@ public class CardGesture : MonoBehaviour {
 		// Card Manager
 		cardManager.AddCard(this);
 	}
-	public void ExecuteEvent(PlayerAction action, string from, string to) {
+	public void ExecuteEvent(IntentType action, string from, string to) {
 		// print("execute " + from);
 		print(to);
 		transform.parent = cardManager.FindArea(to);

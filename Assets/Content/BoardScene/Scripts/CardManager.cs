@@ -7,21 +7,21 @@ public class CardManager : MonoBehaviour {
 	public Transform areas;
 	public PlayerEvent onIntent;
 
-	Dictionary<string, CardGesture> cards = new Dictionary<string, CardGesture>();
+	Dictionary<string, Card> cards = new Dictionary<string, Card>();
 
-	public void AddCard(CardGesture card) {
+	public void AddCard(Card card) {
 		card.onInput.AddListener(Intent);
 		cards.Add(card.name, card);
 	}
-	public void RemoveCard(CardGesture card) {
+	public void RemoveCard(Card card) {
 		card.onInput.RemoveListener(Intent);
 		cards.Remove(card.name);
 	}
-	void Intent(PlayerAction action, string from, string to) {
+	void Intent(IntentType action, string from, string to) {
 		onIntent.Invoke(action, from, to);
 	}
 
-	public void Execute(PlayerAction action, string from, string to) {
+	public void Execute(IntentType action, string from, string to) {
 		cards[from].ExecuteEvent(action, from, to);
 	}
 

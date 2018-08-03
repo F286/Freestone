@@ -113,20 +113,20 @@ public class NetworkPlayer : NetworkBehaviour
 		Debug.Log ("score:"+score);
 	}
 
-	void Intent(PlayerAction action, string from, string to) {
+	void Intent(IntentType action, string from, string to) {
 		CmdOnInput(action, from, to);
 	}
 
 	[Command]
-	void CmdOnInput(PlayerAction action, string from, string to) {
+	void CmdOnInput(IntentType action, string from, string to) {
 		Execute(action, from, to);
 	}
 
-	public void Execute(PlayerAction action, string from, string to) {
+	public void Execute(IntentType action, string from, string to) {
 		RpcOnExecute(action, from, to);
 	}
 	[ClientRpc]
-	void RpcOnExecute(PlayerAction action, string from, string to) {
+	void RpcOnExecute(IntentType action, string from, string to) {
 		controller.Execute(action, from, to);
 	}
 
@@ -139,5 +139,5 @@ public class NetworkPlayer : NetworkBehaviour
 }
 
 [System.Serializable]
-public class PlayerEvent : UnityEvent<PlayerAction, string, string> {
+public class PlayerEvent : UnityEvent<IntentType, string, string> {
 }

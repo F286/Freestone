@@ -2,14 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum PlayerAction
-{
-	Drag,
-	Press,
-	// SHOOT,
-	// JUMP
-}
-
 public class PlayerController : MonoBehaviour {
 	public PlayerEvent onIntent;
 	bool isLocalPlayer = false;
@@ -20,11 +12,11 @@ public class PlayerController : MonoBehaviour {
 	public void OnDisable() {
 		CardManager.instance.onIntent.RemoveListener(Intent);
 	}
-	void Intent(PlayerAction action, string from, string to) {
+	void Intent(IntentType action, string from, string to) {
 		onIntent.Invoke(action, from, to);
 	}
 
-	public void Execute(PlayerAction action, string from, string to) {
+	public void Execute(IntentType action, string from, string to) {
 		CardManager.instance.Execute(action, from, to);
 	}
 
