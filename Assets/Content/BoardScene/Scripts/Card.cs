@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Card : MonoBehaviour {
-	public PlayerEvent onInput;
+	public PlayerEvent onIntent;
+	public PlayerEvent onExecute;
 	[Space]
 	public CardManager cardManager;
 
 	public void OnEnable() {
+		onExecute.AddListener(ExecuteEvent);
+
 		// Drag
 		this.BeginDrag(data => {
 		});
@@ -19,7 +22,7 @@ public class Card : MonoBehaviour {
 			// print(data.hovered.Count);
 			foreach (var item in data.hovered) {
 				if (item.GetComponent<CardTarget>()) {
-					onInput.Invoke(IntentType.DragToBoard, name, item.name);
+					onIntent.Invoke(IntentType.DragToBoard, name, item.name);
 					break;
 				}
 
@@ -29,12 +32,13 @@ public class Card : MonoBehaviour {
 		// Card Manager
 		cardManager.AddCard(this);
 	}
-	public void ExecuteEvent(IntentType action, string from, string to) {
+	void ExecuteEvent(IntentType action, string from, string to) {
 		// print("execute " + from);
-		print(to);
+		// print(to);
 		transform.parent = cardManager.FindArea(to);
 	}
 	public void OnDisable() {
+		onExecute.RemoveListener(ExecuteEvent);
 		// Drag
 		this.ClearDrag();
 

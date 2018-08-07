@@ -17,7 +17,8 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	public void Execute(IntentType action, string from, string to) {
-		CardManager.instance.Execute(action, from, to);
+		// CardManager.instance.Execute(action, from, to);
+		CardManager.instance.onExecute.Invoke(action, from, to);
 	}
 
 	// Update is called once per frame
