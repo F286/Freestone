@@ -3,23 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
-	public PlayerEvent onIntent;
+	// public PlayerEvent onIntent;
 	bool isLocalPlayer = false;
 
-	public void OnEnable() {
-		CardManager.instance.onIntent.AddListener(Intent);
-	}
-	public void OnDisable() {
-		CardManager.instance.onIntent.RemoveListener(Intent);
-	}
-	void Intent(IntentType action, string from, string to) {
-		onIntent.Invoke(action, from, to);
-	}
+	// public void OnEnable() {
+	// 	CardManager.instance.onIntent.AddListener(Intent);
+	// }
+	// public void OnDisable() {
+	// 	CardManager.instance.onIntent.RemoveListener(Intent);
+	// }
+	// void Intent(IntentType action, string from, string to) {
+	// 	onIntent.Invoke(action, from, to);
+	// }
 
-	public void Execute(IntentType action, string from, string to) {
-		// CardManager.instance.Execute(action, from, to);
-		CardManager.instance.onExecute.Invoke(action, from, to);
-	}
+	// public void Execute(IntentType action, string from, string to) {
+	// 	// CardManager.instance.Execute(action, from, to);
+	// 	CardManager.instance.onExecute.Invoke(action, from, to);
+	// }
 
 	// Update is called once per frame
 	void Update()
