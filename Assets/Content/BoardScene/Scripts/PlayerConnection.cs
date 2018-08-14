@@ -64,18 +64,16 @@ public class PlayerConnection : NetworkBehaviour {
 			var clone = GameObject.Instantiate(CardManager.instance.cardTemplate);
 			NetworkServer.SpawnWithClientAuthority(clone, connectionToClient);
 			var index = NetworkManager.instance.GetPlayerIndex(this);
-			print(index);
-			RpcParentCard(clone, index);
-			// NetworkServer.SpawnWithClientAuthority(card, player.connectionToClient);
-			// clone.GetComponent<Card>().RpcSetup(parent.gameObject);
-			// NetworkManager.Instantiate
+			// print(index);
+			clone.GetComponent<Card>().parent = CardManager.instance.hands[index].name;
+			// RpcParentCard(clone, index);
 		}
 	}
-	[ClientRpc]
-	public void RpcParentCard(GameObject card, int playerIndex) {
-		print("rpc parent card " + playerIndex);
-		card.transform.SetParent(CardManager.instance.hands[playerIndex], false);
-	}
+	// [ClientRpc]
+	// public void RpcParentCard(GameObject card, int playerIndex) {
+	// 	print("rpc parent card " + playerIndex);
+	// 	card.transform.SetParent(CardManager.instance.hands[playerIndex], false);
+	// }
 	// public void SpawnCards(NetworkPlayer player, int index) {
 	// 	print("spawn cards " + index);
 
